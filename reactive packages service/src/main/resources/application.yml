@@ -3,6 +3,14 @@ server:
 spring:
   application:
     name: packages-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  # rabbitMQ config for Spring Cloud Bus to be able to communicate
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 eureka:
   client:
     service-url:
