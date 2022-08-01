@@ -11,9 +11,22 @@ spring:
     port: 5672
     username: guest
     password: guest
+  data:
+    mongodb:
+      uri: mongodb://root:rootroot@0.0.0.0:27017/packagesservicedb?authSource=admin&retryWrites=true&w=majority #without '?authSource=admin' doesn't work
+      database: packagesservicedb
+      username: root
+      password: rootroot
+#        host: localhost
+#        username: dbUser
+#        password: dbPassword
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+logging:
+  level:
+    com.example.demo: DEBUG
