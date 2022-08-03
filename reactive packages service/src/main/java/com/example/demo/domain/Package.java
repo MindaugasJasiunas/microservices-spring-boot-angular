@@ -1,14 +1,15 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -17,16 +18,29 @@ import java.util.UUID;
 @AllArgsConstructor
 
 @Document(collection="packages")
-public class Package {
+public class Package implements Serializable {
+    private static final long serialVersionUID = 1337447015571327775L;
     public static final String SEQUENCE_NAME = "packages_sequence";
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Id
     private String id;
     private UUID publicId = UUID.randomUUID();
     private String trackingNumber;
-    private PackageState packageStatus;
-    @CreatedDate
-    private LocalDateTime createdDate;
-    @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
+    private PackageState packageStatus = PackageState.NEW;
+    private LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime lastModifiedDate = LocalDateTime.now();
+    private Long numberOfPackages = 1L;
+    private Long packageWeight;
+    private String packageContentsDescription;
+    private boolean fragile = false;
+
+    @JsonIgnore
+    private String senderId;
+    @JsonIgnore
+    private String receiverId;
+
+    @Transient
+    private Sender sender;
+    @Transient
+    private Receiver receiver;
 }
