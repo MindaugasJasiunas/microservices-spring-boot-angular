@@ -5,6 +5,7 @@ import com.example.demo.domain.Package;
 import com.example.demo.repository.PackageRepository;
 import com.example.demo.repository.ReceiverRepository;
 import com.example.demo.repository.SenderRepository;
+import com.example.demo.validator.PackageValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,8 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static com.example.demo.validator.PackageValidator.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -48,6 +51,12 @@ public class PackageServiceImpl implements PackageService{
 
     @Override
     public Mono<Package> createNewPackage(Package newPackage) {
+        // check if passed package is valid - before all the workflow needed to save it
+        PackageValidator.ValidationResult result = isPackageValid(newPackage);
+        if(result != PackageValidator.ValidationResult.SUCCESS){
+            return Mono.error(() -> new RuntimeException("Package is invalid: "+result.name()));
+        }
+
         Mono<Package> packageMono = Mono.just(newPackage);
 
         return sequenceGeneratorService.generateSequence(Package.SEQUENCE_NAME)
@@ -107,6 +116,24 @@ public class PackageServiceImpl implements PackageService{
                     tuple.getT1().setSender(tuple.getT3());
                     return tuple.getT1();
                 });
+    }
+
+    private PackageValidator.ValidationResult isPackageValid(Package pkg){
+        return PackageValidator
+                .isPackageExists()
+                .and(isNumberOfPackagesValid())
+                .and(isPackagesWeightValid())
+                .and(isSenderExists())
+                .and(isSenderAddressValid())
+                .and(isSenderFirstNameValid())
+                .and(isSenderLastNameValid())
+                .and(isSenderPhoneNumberValid())
+                .and(isReceiverExists())
+                .and(isReceiverAddressValid())
+                .and(isReceiverFirstNameValid())
+                .and(isReceiverLastNameValid())
+                .and(isReceiverPhoneNumberValid())
+                .apply(pkg);
     }
 
 }
