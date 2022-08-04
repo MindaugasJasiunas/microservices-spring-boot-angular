@@ -2,9 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.domain.*;
 import com.example.demo.domain.Package;
+import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.repository.PackageRepository;
-import com.example.demo.repository.ReceiverRepository;
-import com.example.demo.repository.SenderRepository;
 import com.example.demo.validator.PackageValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +36,8 @@ public class PackageServiceImpl implements PackageService{
     @Override
     public Mono<Package> findPackageByTrackingNumber(String trackingNumber) {
         return packageRepository.findByTrackingNumber(trackingNumber)
-                .flatMap(aPackage -> setReceiverAndSender(Mono.just(aPackage)));
+                .flatMap(aPackage -> setReceiverAndSender(Mono.just(aPackage)))
+                .switchIfEmpty(Mono.error(() -> new BadRequestException("Package with provided tracking number not found")));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class PackageServiceImpl implements PackageService{
         // check if passed package is valid - before all the workflow needed to save it
         PackageValidator.ValidationResult result = isPackageValid(newPackage);
         if(result != PackageValidator.ValidationResult.SUCCESS){
-            return Mono.error(() -> new RuntimeException("Package is invalid: "+result.name()));
+            return Mono.error(() -> new BadRequestException("Package is invalid: "+result.name()));
         }
 
         Mono<Package> packageMono = Mono.just(newPackage);
