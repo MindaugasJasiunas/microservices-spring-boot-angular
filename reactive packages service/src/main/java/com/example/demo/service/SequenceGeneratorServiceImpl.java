@@ -16,6 +16,7 @@ public class SequenceGeneratorServiceImpl implements SequenceGeneratorService{
 
     @Override
     public Mono<DatabaseSequence> generateSequence(final String sequenceName) {
+        log.debug("[SequenceGeneratorServiceImpl] generateSequence("+sequenceName+") called");
 
         return repository.findById(sequenceName)
         .flatMap(databaseSequence -> repository.save(databaseSequence.incrementAndReturn()))
