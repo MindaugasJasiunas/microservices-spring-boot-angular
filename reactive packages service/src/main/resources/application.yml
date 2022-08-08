@@ -30,3 +30,9 @@ eureka:
 logging:
   level:
     com.example.demo: DEBUG
+
+axon:
+  serializer:
+    general: jackson
+    events: jackson
+    messages: Jackson

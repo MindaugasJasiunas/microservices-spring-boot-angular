@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.util.CustomPageImpl;
 import com.example.demo.domain.*;
 import com.example.demo.domain.Package;
 import com.example.demo.exceptions.BadRequestException;
@@ -7,8 +8,6 @@ import com.example.demo.repository.PackageRepository;
 import com.example.demo.util.validator.PackageValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -42,13 +41,13 @@ public class PackageServiceImpl implements PackageService{
     }
 
     @Override
-    public Mono<Page<Package>> findAll(PageRequest pageRequest) {
+    public Mono<CustomPageImpl<Package>> findAll(PageRequest pageRequest) {
         log.debug("[PackageServiceImpl] findAll("+pageRequest+") called");
         return packageRepository.findAllBy(pageRequest)
                 .flatMap(aPackage -> setReceiverAndSender(Mono.just(aPackage))) // set receivers & senders for each package
                 .collectList()
                 .zipWith(packageRepository.count())
-                .map(tuple -> new PageImpl<>(tuple.getT1(), pageRequest, tuple.getT2()));
+                .map(tuple -> new CustomPageImpl<>(tuple.getT1(), pageRequest, tuple.getT2()));
     }
 
     @Override

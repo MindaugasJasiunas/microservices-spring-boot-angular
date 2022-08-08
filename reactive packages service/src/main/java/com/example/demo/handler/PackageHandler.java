@@ -1,10 +1,10 @@
 package com.example.demo.handler;
 
+import com.example.demo.util.CustomPageImpl;
 import com.example.demo.domain.Package;
 import com.example.demo.service.PackageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -49,7 +48,7 @@ public class PackageHandler {
         if(request.queryParam("sort").isPresent()){
             sortFieldName = request.queryParam("sort").get();
         }
-        return ServerResponse.ok().contentType(APPLICATION_JSON).body(BodyInserters.fromPublisher(packageService.findAll(PageRequest.of(page, size).withSort(Sort.by(sortFieldName).ascending())), new ParameterizedTypeReference<Page<Package>>(){}));
+        return ServerResponse.ok().contentType(APPLICATION_JSON).body(BodyInserters.fromPublisher(packageService.findAll(PageRequest.of(page, size).withSort(Sort.by(sortFieldName).ascending())), new ParameterizedTypeReference<CustomPageImpl<Package>>(){}));
     }
 
     public Mono<ServerResponse> createPackage(ServerRequest request) {
