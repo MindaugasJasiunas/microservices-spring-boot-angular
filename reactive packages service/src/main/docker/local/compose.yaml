@@ -41,3 +41,19 @@ services:
 #      ME_CONFIG_MONGODB_ADMINPASSWORD: rootroot
 #    links:
 #      - mongoDB
+
+  axonFramework:
+    image: axoniq/axonserver
+    container_name: axon-framework
+    ports:
+      - 8024:8024
+      - 8124:8124
+    volumes:
+      - /home/linuxmachine/dockerstorage/axon-docker/data:/data
+      - /home/linuxmachine/dockerstorage/axon-docker/eventdata:/eventdata
+      - /home/linuxmachine/dockerstorage/axon-docker/config:/config
+    environment:
+      AXONIQ_AXONSERVER_NAME: Axon Server
+      AXONIQ_AXONSERVER_HOSTNAME: localhost
+      SERVER_PORT: 8024
+      AXONIQ_AXONSERVER_DEVMODE_ENABLED: true #enable Axon Server to start up in development mode - it enables RESET button in dashboard. It can be used to clear the Event Store storage
