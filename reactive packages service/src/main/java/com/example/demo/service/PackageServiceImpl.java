@@ -4,7 +4,7 @@ import com.example.demo.domain.*;
 import com.example.demo.domain.Package;
 import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.repository.PackageRepository;
-import com.example.demo.validator.PackageValidator;
+import com.example.demo.util.validator.PackageValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static com.example.demo.validator.PackageValidator.*;
+import static com.example.demo.util.validator.PackageValidator.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -35,6 +35,7 @@ public class PackageServiceImpl implements PackageService{
 
     @Override
     public Mono<Package> findPackageByTrackingNumber(String trackingNumber) {
+        log.debug("[PackageServiceImpl] findPackageByTrackingNumber(trackingNumber: "+trackingNumber+") called");
         return packageRepository.findByTrackingNumber(trackingNumber)
                 .flatMap(aPackage -> setReceiverAndSender(Mono.just(aPackage)))
                 .switchIfEmpty(Mono.error(() -> new BadRequestException("Package with provided tracking number not found")));
@@ -42,6 +43,7 @@ public class PackageServiceImpl implements PackageService{
 
     @Override
     public Mono<Page<Package>> findAll(PageRequest pageRequest) {
+        log.debug("[PackageServiceImpl] findAll("+pageRequest+") called");
         return packageRepository.findAllBy(pageRequest)
                 .flatMap(aPackage -> setReceiverAndSender(Mono.just(aPackage))) // set receivers & senders for each package
                 .collectList()
@@ -51,12 +53,13 @@ public class PackageServiceImpl implements PackageService{
 
     @Override
     public Mono<Package> createNewPackage(Package newPackage) {
+        log.debug("[PackageServiceImpl] createNewPackage("+newPackage+")");
         // check if passed package is valid - before all the workflow needed to save it
         PackageValidator.ValidationResult result = isPackageValid(newPackage);
         if(result != PackageValidator.ValidationResult.SUCCESS){
+            log.error("[ERROR][PackageServiceImpl][createNewPackage]: Package is invalid: "+result.name());
             return Mono.error(() -> new BadRequestException("Package is invalid: "+result.name()));
         }
-
         Mono<Package> packageMono = Mono.just(newPackage);
 
         return sequenceGeneratorService.generateSequence(Package.SEQUENCE_NAME)
@@ -90,7 +93,7 @@ public class PackageServiceImpl implements PackageService{
                     pkg.setPackageStatus(PackageState.NEW);
                     pkg.setCreatedDate(LocalDateTime.now());
                     pkg.setLastModifiedDate(LocalDateTime.now());
-                    log.debug("Package processed before saving to DB: " + pkg);
+                    log.debug("[PackageServiceImpl][createNewPackage] Package successfully processed before saving to DB: " + pkg);
                     return pkg;
                 }).flatMap(packageRepository::save);
     }
