@@ -16,6 +16,11 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2021.0.3</spring-cloud.version>
+		<axon-spring-boot-starter.version>4.5.14</axon-spring-boot-starter.version>
+		<axon-reactor-spring-boot-starter.version>4.5.1</axon-reactor-spring-boot-starter.version>
+		<google.guava.version>31.1-jre</google.guava.version>
+		<feign-jackson.version>11.9.1</feign-jackson.version>
+		<jackson-bom.version>2.13.2</jackson-bom.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -72,20 +77,50 @@
 		<dependency>
 			<groupId>org.axonframework</groupId>
 			<artifactId>axon-spring-boot-starter</artifactId>
-			<version>4.5.14</version>
+			<version>${axon-spring-boot-starter.version}</version>
 		</dependency>
 		<!-- Axon Framework reactive support -->
 		<dependency>
 			<groupId>org.axonframework.extensions.reactor</groupId>
 			<artifactId>axon-reactor-spring-boot-starter</artifactId>
-			<version>4.5.1</version>
+			<version>${axon-reactor-spring-boot-starter.version}</version>
 		</dependency>
 
 		<!-- Google Guava dependency (Maven required it when Axon is used with Spring Cloud (Axon doesn't use this dependency) -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>31.1-jre</version>
+			<version>${google.guava.version}</version>
+		</dependency>
+
+		<!-- Feign Client -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
+		<!-- For Jackson Decoder & Encoder in Feign Configuration (by default Webflux doesn't support Feign) -->
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-jackson</artifactId>
+			<version>${feign-jackson.version}</version>
+		</dependency>
+
+		<!-- For Feign : An exception was thrown by the remote message handling component: Java 8 date/time type `java.time.LocalDateTime` not supported by default -->
+		<!--	Parameter names	-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-parameter-names</artifactId>
+		</dependency>
+		<!--	Java 8 Date/time	-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+		<!--	Java 8 Datatypes	-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jdk8</artifactId>
 		</dependency>
 
     </dependencies>
@@ -99,6 +134,15 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson</groupId>
+				<artifactId>jackson-bom</artifactId>
+				<version>${jackson-bom.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 

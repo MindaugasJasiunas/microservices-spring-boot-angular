@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.feign.DeliveryServiceClient;
+import com.example.demo.feign.PaymentServiceClient;
 import com.example.demo.util.CustomPageImpl;
 import com.example.demo.domain.*;
 import com.example.demo.domain.Package;
@@ -8,6 +10,7 @@ import com.example.demo.repository.PackageRepository;
 import com.example.demo.util.validator.PackageValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -26,6 +29,9 @@ public class PackageServiceImpl implements PackageService{
     private final SenderService senderService;
     private final ReceiverService receiverService;
     private final SequenceGeneratorService sequenceGeneratorService;
+
+    private final PaymentServiceClient paymentServiceClient;  // feign client
+    private final DeliveryServiceClient deliveryServiceClient;  // feign client
 
     @Override
     public Mono<Package> findPackageByPublicId(UUID publicId) {
@@ -50,15 +56,9 @@ public class PackageServiceImpl implements PackageService{
                 .map(tuple -> new CustomPageImpl<>(tuple.getT1(), pageRequest, tuple.getT2()));
     }
 
+
     @Override
-    public Mono<Package> createNewPackage(Package newPackage) {
-        log.debug("[PackageServiceImpl] createNewPackage("+newPackage+")");
-        // check if passed package is valid - before all the workflow needed to save it
-        PackageValidator.ValidationResult result = isPackageValid(newPackage);
-        if(result != PackageValidator.ValidationResult.SUCCESS){
-            log.error("[ERROR][PackageServiceImpl][createNewPackage]: Package is invalid: "+result.name());
-            return Mono.error(() -> new BadRequestException("Package is invalid: "+result.name()));
-        }
+    public Mono<Package> populateNewPackage(Package newPackage) {
         Mono<Package> packageMono = Mono.just(newPackage);
 
         return sequenceGeneratorService.generateSequence(Package.SEQUENCE_NAME)
@@ -92,35 +92,12 @@ public class PackageServiceImpl implements PackageService{
                     pkg.setPackageStatus(PackageState.NEW);
                     pkg.setCreatedDate(LocalDateTime.now());
                     pkg.setLastModifiedDate(LocalDateTime.now());
-                    log.debug("[PackageServiceImpl][createNewPackage] Package successfully processed before saving to DB: " + pkg);
                     return pkg;
-                }).flatMap(packageRepository::save);
-    }
-
-    private Mono<String> generateUniquePackageTrackingNumberMono(){
-        String randomTrackingNumber = UUID.randomUUID().toString().replaceAll("-", "");
-        // check if not duplicate
-        return packageRepository.findByTrackingNumber(randomTrackingNumber)
-                .filter(aPackage -> aPackage != null)
-                .flatMap(existingPackage -> generateUniquePackageTrackingNumberMono())
-                .switchIfEmpty(Mono.just(randomTrackingNumber));
-    }
-
-    /*private String generateUniquePackageTrackingNumber(){
-        String randomTrackingNumber = UUID.randomUUID().toString().replaceAll("-", "");
-        return randomTrackingNumber;
-    }*/
-
-    private Mono<Package> setReceiverAndSender(Mono<Package> pkg){
-        return pkg.flatMap(aPackage -> Mono.zip(Mono.just(aPackage), receiverService.findReceiverById(aPackage.getReceiverId()), senderService.findSenderById(aPackage.getSenderId())))
-                .map(tuple -> {
-                    tuple.getT1().setReceiver(tuple.getT2());
-                    tuple.getT1().setSender(tuple.getT3());
-                    return tuple.getT1();
                 });
     }
 
-    private PackageValidator.ValidationResult isPackageValid(Package pkg){
+    @Override
+    public PackageValidator.ValidationResult isPackageValid(Package pkg){
         return PackageValidator
                 .isPackageExists()
                 .and(isNumberOfPackagesValid())
@@ -136,6 +113,38 @@ public class PackageServiceImpl implements PackageService{
                 .and(isReceiverLastNameValid())
                 .and(isReceiverPhoneNumberValid())
                 .apply(pkg);
+    }
+
+    @Override
+    public Mono<PaymentResponse> sendPaymentHTTP(Package pkg) {
+        PaymentResponse payment = paymentServiceClient.createPayment(pkg);
+        log.debug("package sent to payments service to register. Response: "+payment);
+        return Mono.just(payment);
+    }
+
+    @Override
+    public Mono<DeliveryResponse> sendDeliveryHTTP(UUID parcelPublicId){
+        DeliveryResponse delivery = deliveryServiceClient.createDelivery(parcelPublicId);
+        log.debug("package public ID sent to delivery service to register pickup time. Response: "+delivery);
+        return Mono.just(delivery);
+    }
+
+    private Mono<String> generateUniquePackageTrackingNumberMono(){
+        String randomTrackingNumber = UUID.randomUUID().toString().replaceAll("-", "");
+        // check if not duplicate
+        return packageRepository.findByTrackingNumber(randomTrackingNumber)
+                .filter(aPackage -> aPackage != null)
+                .flatMap(existingPackage -> generateUniquePackageTrackingNumberMono())
+                .switchIfEmpty(Mono.just(randomTrackingNumber));
+    }
+
+    private Mono<Package> setReceiverAndSender(Mono<Package> pkg){
+        return pkg.flatMap(aPackage -> Mono.zip(Mono.just(aPackage), receiverService.findReceiverById(aPackage.getReceiverId()), senderService.findSenderById(aPackage.getSenderId())))
+                .map(tuple -> {
+                    tuple.getT1().setReceiver(tuple.getT2());
+                    tuple.getT1().setSender(tuple.getT3());
+                    return tuple.getT1();
+                });
     }
 
 }

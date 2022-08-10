@@ -1,5 +1,6 @@
 package com.example.demo.handler;
 
+import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.util.CustomPageImpl;
 import com.example.demo.domain.Package;
 import com.example.demo.service.PackageService;
@@ -52,10 +53,11 @@ public class PackageHandler {
     }
 
     public Mono<ServerResponse> createPackage(ServerRequest request) {
-        return request.bodyToMono(Package.class)
+        /*return request.bodyToMono(Package.class)
                 .flatMap(packageService::createNewPackage)
                 .flatMap(createdPackage -> ServerResponse.created(URI.create("/tracking/" + createdPackage.getTrackingNumber())).build())
-                .switchIfEmpty(ServerResponse.badRequest().build());
+                .switchIfEmpty(ServerResponse.badRequest().build());*/
+        return Mono.error(() -> new BadRequestException("createPackage handler doesnt exists anymore"));
     }
 
 }

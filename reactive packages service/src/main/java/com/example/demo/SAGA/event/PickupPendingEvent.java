@@ -10,7 +10,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ParcelCreatedEvent {  //what it needs to be done when this event object is consumed
+public class PickupPendingEvent {  //what it needs to be done when this event object is consumed
     private UUID parcelPublicId;
-    private Package parcel;
 }

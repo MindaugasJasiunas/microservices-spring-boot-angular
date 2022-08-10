@@ -11,9 +11,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CreateParcelCommand {
+public class PaymentApprovalCommand {
     @TargetAggregateIdentifier
     // this identifier is used to associate command with an aggregate object in application.
     private UUID parcelPublicId;
-    private Package parcel;
 }

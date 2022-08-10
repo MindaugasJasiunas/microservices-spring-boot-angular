@@ -18,7 +18,9 @@ public class ParcelCommandController {
 
     @PostMapping
     public Mono<Package> createParcel(@RequestBody Package parcel){
-        CreateParcelCommand createParcelCommand = new CreateParcelCommand(UUID.randomUUID(), parcel);
+        UUID uuid = UUID.randomUUID();
+        parcel.setPublicId(uuid);
+        CreateParcelCommand createParcelCommand = new CreateParcelCommand(uuid, parcel);
 
         //now send to Command Bus for further processing
         return reactiveCommandGateway.send(createParcelCommand);

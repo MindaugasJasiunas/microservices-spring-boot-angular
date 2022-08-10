@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -24,10 +25,12 @@ public class Package implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Id
     private String id;
-    private UUID publicId = UUID.randomUUID();
+    private UUID publicId;// = UUID.randomUUID();
     private String trackingNumber;
     private PackageState packageStatus = PackageState.NEW;
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime createdDate = LocalDateTime.now();
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime lastModifiedDate = LocalDateTime.now();
     private Long numberOfPackages = 1L;
     private Long packageWeight;
