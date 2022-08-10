@@ -7,12 +7,17 @@ Packages service is the main service that handles parcels. It has orchestration 
 - Axon framework (CQRS) + reactive support
 - Global error handler with custom Error Attributes
 - Object (package) validator using Combinator pattern
-
-
 - Functional endpoints using Router/Handler
-- Reactive Spring Security
-- JSON Web Token (JWT) for authentication (custom Authentication Manager & Security Context Repository) - stateless application.
-- CORS filter
+
+## TODO
+- Implement Email microservice
+- Implement Delivery microservice instead of mocked.
+- Implement Payment microservice instead of mocked.
+- Add additional SAGA events & commands like `ParcelInboundEvent`, `SendDeliveryConfirmationEmailCommand` and much more.
+- Add Reactive Spring Security
+- Add JSON Web Token (JWT) for authentication (custom Authentication Manager & Security Context Repository) - stateless application.
+- Add CORS filter
+- Add tests and lots of them !
   
 __(!) Not sure if Axon framework was the right choice even with all the `ReactorCommandGateway` and `ReactorQueryGateway`. We are using reactive repositories, because of that we must _subscribe_ in application's Query side (otherwise data is not saved in read DB - backpressure needed).__
 
