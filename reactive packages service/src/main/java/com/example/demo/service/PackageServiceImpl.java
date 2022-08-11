@@ -92,6 +92,7 @@ public class PackageServiceImpl implements PackageService{
                     pkg.setPackageStatus(PackageState.NEW);
                     pkg.setCreatedDate(LocalDateTime.now());
                     pkg.setLastModifiedDate(LocalDateTime.now());
+                    pkg.setReturn(false);
                     return pkg;
                 });
     }
