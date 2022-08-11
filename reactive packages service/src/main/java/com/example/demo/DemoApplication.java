@@ -14,14 +14,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+//import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.reactive.function.client.WebClient;
+import reactivefeign.spring.config.EnableReactiveFeignClients;
 
 @Slf4j
 
-@EnableFeignClients
+//@EnableFeignClients
+@EnableReactiveFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
 public class DemoApplication {

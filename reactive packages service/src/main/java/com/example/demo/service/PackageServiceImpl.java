@@ -117,16 +117,22 @@ public class PackageServiceImpl implements PackageService{
 
     @Override
     public Mono<PaymentResponse> sendPaymentHTTP(Package pkg) {
-        PaymentResponse payment = paymentServiceClient.createPayment(pkg);
-        log.debug("package sent to payments service to register. Response: "+payment);
-        return Mono.just(payment);
+        Mono<PaymentResponse> payment = paymentServiceClient.createPayment(pkg)
+                .map(paymentResponse -> {
+                    log.debug("package sent to payments service to register. Response: "+paymentResponse);
+                    return paymentResponse;
+                });
+        return payment;
     }
 
     @Override
     public Mono<DeliveryResponse> sendDeliveryHTTP(UUID parcelPublicId){
-        DeliveryResponse delivery = deliveryServiceClient.createDelivery(parcelPublicId);
-        log.debug("package public ID sent to delivery service to register pickup time. Response: "+delivery);
-        return Mono.just(delivery);
+        Mono<DeliveryResponse> delivery = deliveryServiceClient.createDelivery(parcelPublicId)
+                .map(deliveryResponse -> {
+                    log.debug("package public ID sent to delivery service to register pickup time. Response: "+deliveryResponse);
+                    return deliveryResponse;
+                });
+        return delivery;
     }
 
     private Mono<String> generateUniquePackageTrackingNumberMono(){

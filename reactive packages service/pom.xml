@@ -21,6 +21,7 @@
 		<google.guava.version>31.1-jre</google.guava.version>
 		<feign-jackson.version>11.9.1</feign-jackson.version>
 		<jackson-bom.version>2.13.2</jackson-bom.version>
+		<feign-reactor.version>3.2.3</feign-reactor.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -93,11 +94,33 @@
 			<version>${google.guava.version}</version>
 		</dependency>
 
-		<!-- Feign Client -->
+		<!-- Reactive Feign Client -->
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId> spring-cloud-starter-openfeign </artifactId>
+			<groupId>com.playtika.reactivefeign</groupId>
+			<artifactId>feign-reactor-spring-cloud-starter</artifactId>
+			<version>${feign-reactor.version}</version>
+			<type>pom</type>
 		</dependency>
+		<!--<dependency>
+			<groupId>com.playtika.reactivefeign</groupId>
+			<artifactId>feign-reactor-webclient</artifactId>
+			<version>${feign-reactor.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.playtika.reactivefeign</groupId>
+			<artifactId>feign-reactor-cloud</artifactId>
+			<version>${feign-reactor.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.playtika.reactivefeign</groupId>
+			<artifactId>feign-reactor-spring-configuration</artifactId>
+			<version>${feign-reactor.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-slf4j</artifactId>
+			<version>11.8</version>
+		</dependency>-->
 
 		<!-- For Jackson Decoder & Encoder in Feign Configuration (by default Webflux doesn't support Feign) -->
 		<dependency>
