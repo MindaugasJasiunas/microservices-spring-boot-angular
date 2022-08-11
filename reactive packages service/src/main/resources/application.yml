@@ -42,3 +42,13 @@ axon:
 feign:
   circuitbreaker:
     enabled: true
+
+reactive:
+  feign:
+    client:
+      config:
+        forex-client:
+          options:
+            readTimeoutMillis: 2000
+            writeTimeoutMillis: 2000
+            responseTimeoutMillis: 2000
