@@ -22,7 +22,7 @@ import java.util.UUID;
 public class Package implements Serializable {
     private static final long serialVersionUID = 1337447015571327775L;
     public static final String SEQUENCE_NAME = "packages_sequence";
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)  // should use DTO's for it
     @Id
     private String id;
     private UUID publicId;// = UUID.randomUUID();
