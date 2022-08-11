@@ -147,7 +147,7 @@ public class ParcelAggregate {
 
     @CommandHandler
     public ParcelAggregate(PickupAssignedCommand command, ReactorEventGateway reactiveEventGateway) {
-        log.debug("[ParcelAggregate] PickupAssignedCommand called: Parcel UUID: "+command.getPickupDateAndTime()+", pickup time: "+command.getPickupDateAndTime());
+        log.debug("[ParcelAggregate] PickupAssignedCommand called: Parcel UUID: "+command.getParcelPublicId()+", pickup time: "+command.getPickupDateAndTime());
 
         // TODO: send HTTP to email service(create service too) to inform sender about pickup time
 
