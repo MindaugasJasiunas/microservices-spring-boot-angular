@@ -17,6 +17,7 @@ public class Package implements Serializable {
     private Long packageWeight;
     private String packageContentsDescription;
     private boolean fragile;
+    private boolean isReturn = false;
 
     private String senderId;
     private String receiverId;
@@ -28,7 +29,7 @@ public class Package implements Serializable {
     public Package() {
     }
 
-    public Package(String id, UUID publicId, String trackingNumber, PackageState packageStatus, LocalDateTime createdDate, LocalDateTime lastModifiedDate, Long numberOfPackages, Long packageWeight, String packageContentsDescription, boolean fragile, String senderId, String receiverId, Sender sender, Receiver receiver) {
+    public Package(String id, UUID publicId, String trackingNumber, PackageState packageStatus, LocalDateTime createdDate, LocalDateTime lastModifiedDate, Long numberOfPackages, Long packageWeight, String packageContentsDescription, boolean fragile, boolean isReturn, String senderId, String receiverId, Sender sender, Receiver receiver) {
         this.id = id;
         this.publicId = publicId;
         this.trackingNumber = trackingNumber;
@@ -39,13 +40,13 @@ public class Package implements Serializable {
         this.packageWeight = packageWeight;
         this.packageContentsDescription = packageContentsDescription;
         this.fragile = fragile;
+        this.isReturn = isReturn;
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.sender = sender;
         this.receiver = receiver;
     }
 
-    //setters & getters
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -134,6 +135,14 @@ public class Package implements Serializable {
         this.fragile = fragile;
     }
 
+    public boolean isReturn() {
+        return isReturn;
+    }
+
+    public void setReturn(boolean aReturn) {
+        isReturn = aReturn;
+    }
+
     public String getSenderId() {
         return senderId;
     }
@@ -179,6 +188,7 @@ public class Package implements Serializable {
                 ", packageWeight=" + packageWeight +
                 ", packageContentsDescription='" + packageContentsDescription + '\'' +
                 ", fragile=" + fragile +
+                ", isReturn=" + isReturn +
                 ", senderId='" + senderId + '\'' +
                 ", receiverId='" + receiverId + '\'' +
                 ", sender=" + sender +

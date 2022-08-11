@@ -36,6 +36,7 @@ public class Package implements Serializable {
     private Long packageWeight;
     private String packageContentsDescription;
     private boolean fragile = false;
+    private boolean isReturn = false;
 
     @JsonIgnore
     private String senderId;
