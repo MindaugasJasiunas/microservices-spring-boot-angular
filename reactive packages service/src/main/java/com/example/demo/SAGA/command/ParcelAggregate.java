@@ -134,6 +134,15 @@ public class ParcelAggregate {
     }
 
     @CommandHandler
+    public ParcelAggregate(DisableParcelCommand command, ReactorEventGateway reactiveEventGateway) {
+        log.debug("[ParcelAggregate] DisableParcelCommand called: Parcel UUID: "+command.getParcelPublicId());
+
+        ParcelDisabledEvent event = new ParcelDisabledEvent(command.getParcelPublicId());
+        log.debug("ParcelDisabledEvent published to reactiveEventGateway.");
+        reactiveEventGateway.publish(event).subscribe();
+    }
+
+    @CommandHandler
     public ParcelAggregate(ReservePickupCommand command, PackageService packageService, ReactorEventGateway reactiveEventGateway) {
         log.debug("[ParcelAggregate] ReservePickupCommand called");
 

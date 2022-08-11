@@ -1,5 +1,6 @@
 package com.example.demo.SAGA;
 
+import com.example.demo.SAGA.command.command.DisableParcelCommand;
 import com.example.demo.SAGA.command.command.ProcessPaymentCommand;
 import com.example.demo.SAGA.command.command.ReservePickupCommand;
 import com.example.demo.SAGA.event.*;
@@ -51,7 +52,18 @@ public class ParcelSaga {
     @SagaEventHandler(associationProperty = "parcelPublicId")
     public void handle(PaymentRejectedEvent event){
         log.debug("[SAGA] PaymentRejectedEvent received. Issuing ... (Compensating Transaction)");
-        // TODO: do compensating transaction for payment rejected event
+        // COMPENSATING TRANSACTION (could make whole chain of compensating transactions but this one is simple)
+        // create & issue DisableParcelCommand
+        DisableParcelCommand command = new DisableParcelCommand(event.getParcelPublicId());
+
+        //now send to Command Bus for further processing
+        reactiveCommandGateway.send(command).subscribe(); // send-and-forget pattern
+    }
+
+    @SagaEventHandler(associationProperty = "parcelPublicId")
+    public void handle(ParcelDisabledEvent event){
+        log.debug("[SAGA] ParcelDisabledEvent received. Doing nothing.");
+        // wait for sender to make a payment
     }
 
     @SagaEventHandler(associationProperty = "parcelPublicId")
