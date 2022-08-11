@@ -123,6 +123,14 @@
 			<artifactId> jackson-datatype-jdk8 </artifactId>
 		</dependency>
 
+
+		<!-- Resilience4J Circuit Breaker (Hystrix deprecated) -->
+		<!-- 'spring-cloud-starter-circuitbreaker-resilience4j' for spring webmvc, 'spring-cloud-starter-circuitbreaker-reactor-resilience4j' for webflux -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+		</dependency>
+
     </dependencies>
 
 	<dependencyManagement>

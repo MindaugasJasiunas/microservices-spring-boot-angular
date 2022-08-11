@@ -37,3 +37,8 @@ axon:
     general: jackson
     events: jackson
     messages: Jackson
+
+#enable circuit breaker
+feign:
+  circuitbreaker:
+    enabled: true
