@@ -36,7 +36,5 @@ public class ParcelQueryController {
         final ResponseType<Page<Package>> responseType = new PageResponseType<>(Package.class);
         final Mono<Page<Package>> resultFuture = reactiveQueryGateway.query(query, responseType);
         return resultFuture;
-
-        // TODO: try to use routes/handler when @RestController works perfectly.
     }
 }

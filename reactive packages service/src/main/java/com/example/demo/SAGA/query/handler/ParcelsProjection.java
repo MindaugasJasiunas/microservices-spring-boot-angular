@@ -32,12 +32,10 @@ public class ParcelsProjection {  //instead of ParcelsEventsHandler
     @EventHandler
     public void on(ParcelCreatedEvent parcelCreatedEvent){
         log.debug("[ParcelsProjection(Events Handler)][ParcelCreatedEvent] saving parcel:" + parcelCreatedEvent.getParcel());
-        packageRepository.save(parcelCreatedEvent.getParcel()).subscribe(parcel -> {
-            log.debug("[ParcelsProjection(Events Handler)][ParcelCreatedEvent] saved parcel:" + parcel);
-        });
+        packageRepository.save(parcelCreatedEvent.getParcel()).subscribe(parcel ->
+            log.debug("[ParcelsProjection(Events Handler)][ParcelCreatedEvent] saved parcel:" + parcel)
+        );
     }
-
-    // TODO: implement methods to update Package state
 
     @EventHandler
     public void on(DeliveryErrorEvent deliveryErrorEvent){

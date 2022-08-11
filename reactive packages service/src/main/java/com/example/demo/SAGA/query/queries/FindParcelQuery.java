@@ -1,8 +1,10 @@
 package com.example.demo.SAGA.query.queries;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Getter
 @Setter
 public class FindParcelQuery {
