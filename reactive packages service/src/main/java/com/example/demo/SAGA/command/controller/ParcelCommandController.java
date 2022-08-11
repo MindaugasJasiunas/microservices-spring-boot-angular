@@ -16,7 +16,7 @@ import java.util.UUID;
 public class ParcelCommandController {
     private final ReactorCommandGateway reactiveCommandGateway;
 
-    @PostMapping
+    @PostMapping("/submitNewPackage")
     public Mono<Package> createParcel(@RequestBody Package parcel){
         UUID uuid = UUID.randomUUID();
         parcel.setPublicId(uuid);

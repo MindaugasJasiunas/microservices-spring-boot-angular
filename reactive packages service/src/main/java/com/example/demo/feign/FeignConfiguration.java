@@ -15,25 +15,27 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FeignConfiguration{
 
+    // with this - no more auto-configuration (auto-config needed for custom pageRequestDeserializer deserializer to pickup(otherwise list packages not working))
     // for feign error: throws Java 8 date/time type `java.time.LocalDateTime` not supported by default
-    @Bean
+    /*@Bean
     ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
      // objectMapper.findAndRegisterModules();
+
         objectMapper
                 .registerModule(new ParameterNamesModule())
                 .registerModule(new Jdk8Module())
                 .registerModule(new JavaTimeModule());
         return objectMapper;
-    }
+    }*/
 
     @Bean
     public Decoder decoder() {
-        return new JacksonDecoder(objectMapper());
+        return new JacksonDecoder(new ObjectMapper());
     }
 
     @Bean
     public Encoder encoder() {
-        return new JacksonEncoder(objectMapper());
+        return new JacksonEncoder(new ObjectMapper());
     }
 }

@@ -24,14 +24,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 public class PackageHandler {
     private final PackageService packageService;
 
-    public Mono<ServerResponse> trackPackage(ServerRequest request) {
+    /*public Mono<ServerResponse> trackPackage(ServerRequest request) {
         String trackingNumber = request.pathVariable("trackingNumber");
         return packageService.findPackageByTrackingNumber(trackingNumber)
                 .flatMap(pkg -> ServerResponse.ok().contentType(APPLICATION_JSON).body(BodyInserters.fromValue(pkg)))
                 .switchIfEmpty(ServerResponse.badRequest().build());
-    }
+    }*/
 
-    public Mono<ServerResponse> listPackages(ServerRequest request) {
+    /*public Mono<ServerResponse> listPackages(ServerRequest request) {
         int page = 0;
         int size = 5;
         String sortFieldName = "lastModifiedDate";
@@ -50,14 +50,13 @@ public class PackageHandler {
             sortFieldName = request.queryParam("sort").get();
         }
         return ServerResponse.ok().contentType(APPLICATION_JSON).body(BodyInserters.fromPublisher(packageService.findAll(PageRequest.of(page, size).withSort(Sort.by(sortFieldName).ascending())), new ParameterizedTypeReference<CustomPageImpl<Package>>(){}));
-    }
+    }*/
 
-    public Mono<ServerResponse> createPackage(ServerRequest request) {
-        /*return request.bodyToMono(Package.class)
+    /*public Mono<ServerResponse> createPackage(ServerRequest request) {
+        return request.bodyToMono(Package.class)
                 .flatMap(packageService::createNewPackage)
                 .flatMap(createdPackage -> ServerResponse.created(URI.create("/tracking/" + createdPackage.getTrackingNumber())).build())
-                .switchIfEmpty(ServerResponse.badRequest().build());*/
-        return Mono.error(() -> new BadRequestException("createPackage handler doesnt exists anymore"));
-    }
+                .switchIfEmpty(ServerResponse.badRequest().build());
+    }*/
 
 }

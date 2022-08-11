@@ -17,9 +17,9 @@ public class PackageRoutes {
     @Bean
     public RouterFunction<ServerResponse> authRoutes(PackageHandler packageHandler){
         return RouterFunctions.route()
-                .GET("/tracking/{trackingNumber}", accept(MediaType.APPLICATION_JSON), packageHandler::trackPackage)
-                .GET("/list", accept(APPLICATION_JSON), packageHandler::listPackages)
-                .POST("/submitNewPackage", accept(APPLICATION_JSON), packageHandler::createPackage)
+//                .GET("/tracking/{trackingNumber}", accept(MediaType.APPLICATION_JSON), packageHandler::trackPackage)
+//                .GET("/list", accept(APPLICATION_JSON), packageHandler::listPackages)
+//                .POST("/submitNewPackage", accept(APPLICATION_JSON), packageHandler::createPackage)
                 .build();
     }
 }
