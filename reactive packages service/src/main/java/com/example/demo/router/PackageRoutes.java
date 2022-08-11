@@ -12,14 +12,14 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 
-@Configuration
+//@Configuration
 public class PackageRoutes {
-    @Bean
-    public RouterFunction<ServerResponse> authRoutes(PackageHandler packageHandler){
-        return RouterFunctions.route()
+//    @Bean
+//    public RouterFunction<ServerResponse> authRoutes(PackageHandler packageHandler){
+//        return RouterFunctions.route()
 //                .GET("/tracking/{trackingNumber}", accept(MediaType.APPLICATION_JSON), packageHandler::trackPackage)
 //                .GET("/list", accept(APPLICATION_JSON), packageHandler::listPackages)
 //                .POST("/submitNewPackage", accept(APPLICATION_JSON), packageHandler::createPackage)
-                .build();
-    }
+//                .build();
+//    }
 }
