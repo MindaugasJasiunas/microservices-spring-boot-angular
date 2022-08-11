@@ -14,6 +14,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:rootroot@0.0.0.0:27017/packagesservicedb?authSource=admin&retryWrites=true&w=majority #without '?authSource=admin' doesn't work
+#      authentication-database: admin
       database: packagesservicedb
       username: root
       password: rootroot
