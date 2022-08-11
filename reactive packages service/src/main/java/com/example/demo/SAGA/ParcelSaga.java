@@ -3,6 +3,7 @@ package com.example.demo.SAGA;
 import com.example.demo.SAGA.command.command.DisableParcelCommand;
 import com.example.demo.SAGA.command.command.ProcessPaymentCommand;
 import com.example.demo.SAGA.command.command.ReservePickupCommand;
+import com.example.demo.SAGA.command.command.ReturnToSenderCommand;
 import com.example.demo.SAGA.event.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -84,7 +85,12 @@ public class ParcelSaga {
     @SagaEventHandler(associationProperty = "parcelPublicId")
     public void handle(DeliveryErrorEvent event){
         log.debug("[SAGA] DeliveryErrorEvent received. Issuing ... (Compensating Transaction)");
-        // TODO: do compensating transaction for delivery error event
+        // COMPENSATING TRANSACTION
+        // create & issue ReturnToSenderCommand
+        ReturnToSenderCommand command = new ReturnToSenderCommand(event.getParcelPublicId());
+
+        //now send to Command Bus for further processing
+        reactiveCommandGateway.send(command).subscribe(); // send-and-forget pattern
     }
 
     @EndSaga

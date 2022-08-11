@@ -186,6 +186,22 @@ public class ParcelAggregate {
     }
 
     @CommandHandler
+    public ParcelAggregate(ReturnToSenderCommand command, PackageService packageService, ReactorEventGateway reactiveEventGateway) {
+        log.debug("[ParcelAggregate] ReturnToSenderCommand called: Parcel UUID: "+command.getParcelPublicId());
+
+        // ParcelsProjection shifted sender & receiver in places, now we can just send it
+
+        // TODO: send HTTP to email service(create service too) to inform sender about pickup time
+
+        // send HTTP to Delivery Service to save new pickup by parcel.
+        packageService.sendDeliveryHTTP(command.getParcelPublicId()).subscribe();
+
+        PickupConfirmationPendingEvent event = new PickupConfirmationPendingEvent(command.getParcelPublicId());
+        log.debug("PickupConfirmationPendingEvent published to reactiveEventGateway.");
+        reactiveEventGateway.publish(event).subscribe();
+    }
+
+    @CommandHandler
     public ParcelAggregate(DeliveredCommand command, ReactorEventGateway reactiveEventGateway) {
         log.debug("[ParcelAggregate] DeliveredCommand called: Parcel UUID: "+command.getParcelPublicId());
 

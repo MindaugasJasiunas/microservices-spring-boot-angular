@@ -38,9 +38,9 @@ public class Package implements Serializable {
     private boolean fragile = false;
     private boolean isReturn = false;
 
-    @JsonIgnore
+//    @JsonIgnore
     private String senderId;
-    @JsonIgnore
+//    @JsonIgnore
     private String receiverId;
 
     @Transient
