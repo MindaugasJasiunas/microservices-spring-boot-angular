@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 // OpenFeign is not compatible with WebFlux. If you use WebFlux you have to provide your own Encoder and Decoder
 @Configuration
-public class FeignConfiguration {
+public class FeignConfiguration{
 
     // for feign error: throws Java 8 date/time type `java.time.LocalDateTime` not supported by default
     @Bean

@@ -96,13 +96,13 @@
 		<!-- Feign Client -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<artifactId> spring-cloud-starter-openfeign </artifactId>
 		</dependency>
 
 		<!-- For Jackson Decoder & Encoder in Feign Configuration (by default Webflux doesn't support Feign) -->
 		<dependency>
 			<groupId>io.github.openfeign</groupId>
-			<artifactId>feign-jackson</artifactId>
+			<artifactId> feign-jackson </artifactId>
 			<version>${feign-jackson.version}</version>
 		</dependency>
 
@@ -110,17 +110,17 @@
 		<!--	Parameter names	-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
-			<artifactId>jackson-module-parameter-names</artifactId>
+			<artifactId> jackson-module-parameter-names </artifactId>
 		</dependency>
 		<!--	Java 8 Date/time	-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-jsr310</artifactId>
+			<artifactId> jackson-datatype-jsr310 </artifactId>
 		</dependency>
 		<!--	Java 8 Datatypes	-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-jdk8</artifactId>
+			<artifactId> jackson-datatype-jdk8 </artifactId>
 		</dependency>
 
     </dependencies>
@@ -137,7 +137,7 @@
 
 			<dependency>
 				<groupId>com.fasterxml.jackson</groupId>
-				<artifactId>jackson-bom</artifactId>
+				<artifactId> jackson-bom </artifactId>
 				<version>${jackson-bom.version}</version>
 				<scope>import</scope>
 				<type>pom</type>

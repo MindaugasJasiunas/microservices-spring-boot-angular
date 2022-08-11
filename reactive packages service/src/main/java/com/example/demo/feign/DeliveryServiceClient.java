@@ -11,7 +11,7 @@ import java.util.UUID;
 // TODO: Change Feign Client to reactive
 
 @FeignClient(name = "delivery-service")
-public interface DeliveryServiceClient {
+public interface DeliveryServiceClient{
     @RequestMapping(value = "new-delivery/{parcelPublicId}", method = RequestMethod.GET, produces = "application/json", consumes = "application/json") // URL from payment microservice controller
     DeliveryResponse createDelivery(@PathVariable("parcelPublicId") UUID parcelPublicId);
 }
