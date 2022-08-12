@@ -4,7 +4,7 @@ Packages service is the main service that handles parcels. It has orchestration 
 
 - Spring WebFlux (Project Reactor)
 - Reactive MongoDB
-- Axon framework (CQRS) + reactive support + SAGA
+- Axon framework (CQRS) + reactive support + Orchestration SAGA pattern
 - Reactive Feign Client
 - Global error handler with custom Error Attributes
 - Object (package) validator using Combinator pattern
@@ -55,48 +55,41 @@ Axon does not support these types.
 
 - Send new Package as JSON payload
 
-```http request
-[POST] 
-http://localhost:<packagesServicePort>/parcels/submitNewPackage
+```
+[POST] http://localhost:<packagesServicePort>/parcels/submitNewPackage
 ```
 CreateParcelCommand -> Aggregate(ParcelCreatedEvent) -> Saga(ProcessPaymentCommand) -> Aggregate(PaymentPendingEvent)
 
 - (Payment Service) Approve or decline payment for package
 
-```http request
-[GET] 
-http://localhost:<paymentServicePort>/payment/approve/<packagePublicId>
+```
+[GET] http://localhost:<paymentServicePort>/payment/approve/<packagePublicId>
 ```
 PaymentApprovalCommand -> Aggregate(PaymentApprovedEvent) -> Saga(ReservePickupCommand) -> Aggregate(PickupConfirmationPendingEvent)
-```http request
-[GET] 
-http://localhost:<paymentServicePort>/payment/decline/<packagePublicId>
+```
+[GET] http://localhost:<paymentServicePort>/payment/decline/<packagePublicId>
 ```
 PaymentRejectionCommand -> Aggregate(PaymentRejectedEvent) -> Saga(DisableParcelCommand) -> Aggregate(ParcelDisabledEvent)
 
 - (Delivery Service) Confirm Pickup date & time for package
-```http request
-[GET] 
-http://localhost:<deliveryServicePort>/assign/<packagePublicId>
+```
+[GET] http://localhost:<deliveryServicePort>/assign/<packagePublicId>
 ```
 PickupAssignedCommand -> Aggregate(PickupPendingEvent)
 
 - (Delivery Service) Pickup package
-```http request
-[GET] 
-http://localhost:<deliveryServicePort>/picked-up/<packagePublicId>
+```
+[GET] http://localhost:<deliveryServicePort>/picked-up/<packagePublicId>
 ```
 InTransitCommand -> Aggregate(InTransitEvent)
 
 - (Delivery Service) Deliver or fail delivering package
-```http request
-[GET] 
-http://localhost:<deliveryServicePort>/delivered/<packagePublicId>
+```
+[GET] http://localhost:<deliveryServicePort>/delivered/<packagePublicId>
 ```
 DeliveredCommand -> Aggregate(ParcelFinishedEvent) -> @EndSaga
-```http request
-[GET] 
-http://localhost:<deliveryServicePort>/delivery-error/<packagePublicId>
+```
+[GET] http://localhost:<deliveryServicePort>/delivery-error/<packagePublicId>
 ```
 InTransitCommand -> Aggregate(DeliveryErrorEvent) -> Saga(ReturnToSenderCommand) -> Aggregate(PickupConfirmationPendingEvent)
 
