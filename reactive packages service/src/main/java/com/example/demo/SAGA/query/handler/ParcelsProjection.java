@@ -46,18 +46,20 @@ public class ParcelsProjection {  //instead of ParcelsEventsHandler
                 )
                 .map(objects -> {
                     Package parcel = objects.getT1();
-                    // change sides to return
-                    Sender s = objects.getT2();
-                    Receiver r = objects.getT3();
+                    // to not return to original receiver (!)
+                    if(!parcel.isReturn()){
+                        // change sides to return
+                        Sender s = objects.getT2();
+                        Receiver r = objects.getT3();
 
-                    Sender s2= new Sender(null, r.getFirstName(), r.getLastName(), r.getCompany(), r.getPhoneNumber(), r.getEmail(), r.getAddress());
-                    Receiver r2= new Receiver(null, s.getFirstName(), s.getLastName(), s.getCompany(), s.getPhoneNumber(), s.getEmail(), s.getAddress());
-                    parcel.setSender(s2);
-                    parcel.setReceiver(r2);
+                        Sender s2= new Sender(null, r.getFirstName(), r.getLastName(), r.getCompany(), r.getPhoneNumber(), r.getEmail(), r.getAddress());
+                        Receiver r2= new Receiver(null, s.getFirstName(), s.getLastName(), s.getCompany(), s.getPhoneNumber(), s.getEmail(), s.getAddress());
+                        parcel.setSender(s2);
+                        parcel.setReceiver(r2);
 
-                    // mark as return package
-                    parcel.setReturn(true);
-
+                        // mark as return package
+                        parcel.setReturn(true);
+                    }
                     return objects.getT1();
                 })
                 .flatMap(packageRepository::save)
