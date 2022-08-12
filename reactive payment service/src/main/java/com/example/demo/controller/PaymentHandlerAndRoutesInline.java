@@ -2,14 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.SAGA.command.command.PaymentApprovalCommand;
 import com.example.demo.SAGA.command.command.PaymentRejectionCommand;
-import com.example.demo.SAGA.event.PaymentRejectedEvent;
 import com.example.demo.domain.Package;
 import com.example.demo.domain.PaymentResponse;
 import org.axonframework.extensions.reactor.commandhandling.gateway.ReactorCommandGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
