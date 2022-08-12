@@ -35,7 +35,7 @@ Reactive Axon model does not yet support returning of `Mono` or `Flux` from `@Qu
 ### Axon serialization/deserialization 
 #### Serialization / deserialization workaroud
 To prevent error `com.thoughtworks.xstream.converters.ConversionException: <...>`
-we need to override Axon Serializer in [application properties](http://) to use Jackson.
+we need to override Axon Serializer in [application properties](https://github.com/MindaugasJasiunas/microservices-spring-boot-angular/blob/main/reactive%20packages%20service/src/main/resources/application.yml) to use Jackson.
 ```
 axon:
   serializer:
@@ -47,9 +47,9 @@ axon:
 #### Page, Pageable & PageImpl
 Axon does not support these types.
 
-- To use Pageable and return Mono with Page of objects(in this case - Package objects) we need to implement custom `PageImpl` class and use it as return for query handler and service ([`CustomPageImpl`](http://)).
-- To return Page of objects we also need to create custom _Response Type_ ([`PageResponseType`](http://)).
-- For query class (query record in our case) in query handler to have PageRequest as argument and not throw `Cannot construct instance of 'org.springframework.data.domain.Sort' problem: You have to provide at least one property to sort by` exception - we need to implement custom PageRequest deserializer & register it as Module @Bean ([PageRequestDeserializer](http://)).
+- To use Pageable and return Mono with Page of objects(in this case - Package objects) we need to implement custom `PageImpl` class and use it as return for query handler and service ([`CustomPageImpl`](https://github.com/MindaugasJasiunas/microservices-spring-boot-angular/blob/main/reactive%20packages%20service/src/main/java/com/example/demo/util/CustomPageImpl.java)).
+- To return Page of objects we also need to create custom _Response Type_ ([`PageResponseType`](https://github.com/MindaugasJasiunas/microservices-spring-boot-angular/blob/main/reactive%20packages%20service/src/main/java/com/example/demo/util/PageResponseType.java)).
+- For query class (query record in our case) in query handler to have PageRequest as argument and not throw `Cannot construct instance of 'org.springframework.data.domain.Sort' problem: You have to provide at least one property to sort by` exception - we need to implement custom PageRequest deserializer & register it as Module @Bean ([`PageRequestDeserializer`](https://github.com/MindaugasJasiunas/microservices-spring-boot-angular/blob/main/reactive%20packages%20service/src/main/java/com/example/demo/util/json/PageRequestDeserializer.java)).
 
 ## AXON Saga
 
