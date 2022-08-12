@@ -1,6 +1,5 @@
 package com.example.demo.SAGA.command.command;
 
-import com.example.demo.domain.Package;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,10 +7,10 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.util.UUID;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class ReservePickupCommand {
-    @TargetAggregateIdentifier
+public class ReturnToSenderCommand {
+    @TargetAggregateIdentifier // this identifier is used to associate command with an aggregate object in application.
     private UUID parcelPublicId;
 }

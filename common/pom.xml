@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>common</artifactId>
+    <version>5.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+
+        <axon-spring-boot-starter.version>4.5.14</axon-spring-boot-starter.version>
+        <axon-reactor-spring-boot-starter.version>4.5.1</axon-reactor-spring-boot-starter.version>
+        <lombok.version>1.18.24</lombok.version>
+        <spring-boot-maven-plugin.version>2.7.2</spring-boot-maven-plugin.version>
+
+    </properties>
+
+    <dependencies>
+        <!-- Axon Framework -->
+        <dependency>
+            <groupId>org.axonframework</groupId>
+            <artifactId>axon-spring-boot-starter</artifactId>
+            <version>${axon-spring-boot-starter.version}</version>
+        </dependency>
+        <!-- Axon Framework reactive support -->
+        <dependency>
+            <groupId>org.axonframework.extensions.reactor</groupId>
+            <artifactId>axon-reactor-spring-boot-starter</artifactId>
+            <version>${axon-reactor-spring-boot-starter.version}</version>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <!-- org.springframework.data.domain.PageRequest for FindParcelsQuery -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>2.7.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-maven-plugin.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

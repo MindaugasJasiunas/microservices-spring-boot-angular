@@ -5,12 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class ReturnToSenderCommand {
-    @TargetAggregateIdentifier
+public class PickupAssignedCommand {
+    @TargetAggregateIdentifier // this identifier is used to associate command with an aggregate object in application.
     private UUID parcelPublicId;
+    private LocalDateTime pickupDateAndTime;
 }
