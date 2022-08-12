@@ -2,16 +2,12 @@ package com.example.demo.SAGA.query.handler;
 
 import com.example.demo.SAGA.event.DeliveryErrorEvent;
 import com.example.demo.SAGA.event.ParcelCreatedEvent;
-import com.example.demo.SAGA.event.PaymentApprovedEvent;
-import com.example.demo.SAGA.event.PaymentPendingEvent;
 import com.example.demo.domain.Package;
-import com.example.demo.domain.PackageState;
 import com.example.demo.domain.Receiver;
 import com.example.demo.domain.Sender;
 import com.example.demo.repository.PackageRepository;
 import com.example.demo.repository.ReceiverRepository;
 import com.example.demo.repository.SenderRepository;
-import com.example.demo.service.PackageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.eventhandling.EventHandler;

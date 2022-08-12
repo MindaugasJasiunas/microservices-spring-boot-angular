@@ -13,14 +13,8 @@ import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.extensions.reactor.eventhandling.gateway.ReactorEventGateway;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.UUID;
-
-import static com.example.demo.util.validator.PackageValidator.*;
-import static com.example.demo.util.validator.PackageValidator.isReceiverPhoneNumberValid;
 
 
 @Slf4j

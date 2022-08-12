@@ -1,8 +1,8 @@
 package com.example.demo.SAGA.query.controller;
 
-import com.example.demo.util.PageResponseType;
 import com.example.demo.SAGA.query.queries.FindParcelQuery;
 import com.example.demo.SAGA.query.queries.FindParcelsQuery;
+import com.example.demo.util.PageResponseType;
 import com.example.demo.domain.Package;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.extensions.reactor.queryhandling.gateway.ReactorQueryGateway;
