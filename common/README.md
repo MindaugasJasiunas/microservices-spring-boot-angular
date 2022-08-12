@@ -4,6 +4,8 @@
 
 `<packaging>jar</packaging>`
 
+(!) Packages structure should be IDENTICAL to projects using it. 
+
 ## Usage
 
 ### Compile & copy to local maven repository
