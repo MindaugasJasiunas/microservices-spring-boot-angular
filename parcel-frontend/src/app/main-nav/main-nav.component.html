@@ -12,9 +12,21 @@
       </button>
 
       <mat-menu #settingsMenu="matMenu" class="notifications-dropdown">
-        <menu mat-menu-item>Link 1</menu>
-        <menu mat-menu-item>Link 2</menu>
-        <menu mat-menu-item>Link 3</menu>
+        <menu mat-menu-item>
+          <mat-icon aria-label="Side nav toggle icon" routerLink="/"
+            >home</mat-icon
+          >
+        </menu>
+        <menu mat-menu-item>
+          <mat-icon aria-label="Side nav toggle icon" routerLink="/sendPackage"
+            >inventory_2</mat-icon
+          >
+        </menu>
+        <menu mat-menu-item>
+          <mat-icon aria-label="Side nav toggle icon" routerLink="/login"
+            >login</mat-icon
+          >
+        </menu>
       </mat-menu>
 
       <span>materialApp</span>
@@ -23,14 +35,20 @@
 
       <div *ngIf="!(isHandset$ | async)">
         <!-- show if big screen -->
-        <a mat-list-item href="#">
-          <mat-icon aria-label="Side nav toggle icon">home</mat-icon>
+        <a mat-list-item>
+          <mat-icon aria-label="Side nav toggle icon" routerLink="/"
+            >home</mat-icon
+          >
         </a>
-        <a mat-list-item href="#">
-          <mat-icon aria-label="Side nav toggle icon">inventory_2</mat-icon>
+        <a mat-list-item>
+          <mat-icon aria-label="Side nav toggle icon" routerLink="/sendPackage"
+            >inventory_2</mat-icon
+          >
         </a>
-        <a mat-list-item href="#">
-          <mat-icon aria-label="Side nav toggle icon">login</mat-icon>
+        <a mat-list-item>
+          <mat-icon aria-label="Side nav toggle icon" routerLink="/login"
+            >login</mat-icon
+          >
         </a>
       </div>
     </mat-toolbar>

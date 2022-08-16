@@ -1,6 +1,6 @@
-.sidenav-container {
-  height: 100%;
-}
+/* .sidenav-container { */
+  /* height: 100%; */
+/* } */
 
 .sidenav {
   width: 200px;
@@ -24,14 +24,23 @@
   overflow: visible;
 }
 
-.spacer{
+.spacer {
   flex: 1 1 auto;
 }
 
-mat-sidenav-content a:link, a:visited, a:hover, a:active {
-  color:white;
+mat-sidenav-content a, a:link,
+a:visited,
+a:hover,
+a:active {
+  color: white;
   padding: 8px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
+}
+
+.info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
