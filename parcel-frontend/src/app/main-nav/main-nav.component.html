@@ -1,0 +1,39 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle menu"
+        mat-icon-button
+        [matMenuTriggerFor]="settingsMenu"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+
+      <mat-menu #settingsMenu="matMenu" class="notifications-dropdown">
+        <menu mat-menu-item>Link 1</menu>
+        <menu mat-menu-item>Link 2</menu>
+        <menu mat-menu-item>Link 3</menu>
+      </mat-menu>
+
+      <span>materialApp</span>
+
+      <span class="spacer"></span>
+
+      <div *ngIf="!(isHandset$ | async)">
+        <!-- show if big screen -->
+        <a mat-list-item href="#">
+          <mat-icon aria-label="Side nav toggle icon">home</mat-icon>
+        </a>
+        <a mat-list-item href="#">
+          <mat-icon aria-label="Side nav toggle icon">inventory_2</mat-icon>
+        </a>
+        <a mat-list-item href="#">
+          <mat-icon aria-label="Side nav toggle icon">login</mat-icon>
+        </a>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here-->
+  </mat-sidenav-content>
+</mat-sidenav-container>
