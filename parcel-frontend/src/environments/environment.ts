@@ -7,7 +7,7 @@ export const environment = {
   apiUrl: 'http://localhost:9090/', // Spring Cloud API Gateway entrypoint
   apiLoginUrl: 'http://localhost:9090/login',
   apiRegisterUrl: 'http://localhost:9090/register',
-  hostRefreshToken: 'http://localhost:9090/resettoken'
+  apiRefreshUrl: 'http://localhost:9090/resettoken'
 };
 
 /*

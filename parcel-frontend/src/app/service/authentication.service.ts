@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService {
   private loginUrl = environment.apiLoginUrl;
   private registerUrl = environment.apiRegisterUrl;
-  private hostRefreshToken = environment.hostRefreshToken;
+  private refreshUrl = environment.apiRefreshUrl;
   private accessToken: string | null = null;
   private refreshToken: string | null = null;
   private loggedInUsername: string | null = null;
@@ -49,7 +49,7 @@ export class AuthenticationService {
 
   public getAccessToken(refreshToken: string): Observable<HttpResponse<any>> {
     this.isLoggedIn();
-    return this.http.get<string>(this.hostRefreshToken, {
+    return this.http.get<string>(this.refreshUrl, {
       observe: 'response',
       headers: new HttpHeaders({ Authorization: refreshToken }),
     });
@@ -104,9 +104,7 @@ export class AuthenticationService {
     return false;
   }
 
-
-  public isTokenExpired(token: string | undefined){
+  public isTokenExpired(token: string | undefined) {
     return this.jwtHelper.isTokenExpired(token);
   }
-
 }
