@@ -19,6 +19,8 @@ import { RegisterComponent } from './authentication/register/register.component'
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './guard/auth.guard';
+import { PackageInfoComponent } from './packages/package-info/package-info.component';
+import { PackageSendComponent } from './packages/package-send/package-send.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { AuthGuard } from './guard/auth.guard';
     MainNavComponent,
     MainComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PackageInfoComponent,
+    PackageSendComponent
   ],
   imports: [
     HttpClientModule,

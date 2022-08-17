@@ -5,12 +5,11 @@
       <div class="col-xl-6">
         <div class="text-center text-white">
           <h1 class="mb-5">Package Tracking</h1>
-          <form
+          <form (ngSubmit)="submit(f)" #f="ngForm"
             class="form-subscribe"
             id="packageTrackingForm"
             data-sb-form-api-token="API_TOKEN"
           >
-            <!-- Email address input-->
             <div class="row">
               <div class="col">
                 <input
@@ -20,6 +19,8 @@
                   placeholder="Tracking Number"
                   data-sb-validations="required"
                   data-sb-can-submit="no"
+                  required
+                  ngModel name="trackingNumber"
                 />
                 <!-- <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Error text.</div> -->
               </div>
@@ -28,8 +29,9 @@
                   class="btn btn-primary btn-lg"
                   id="submitButton"
                   type="submit"
-                >
-                  Submit
+                  [disabled]="f.status === 'INVALID'"
+                  >
+                     Submit
                 </button>
               </div>
             </div>

@@ -1,0 +1,126 @@
+<div class="container" *ngIf="parcel$ | async as pkg">
+  <div class="row">
+    <div class="col">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Package current status: {{pkg.packageStatus}}</mat-card-title>
+          <mat-card-subtitle>Package tracking number: {{pkg.trackingNumber}}</mat-card-subtitle>
+          <img mat-card-avatar src="https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" style="width: 50px; height: 50px; border-radius: 25%; object-fit: cover;" />
+        </mat-card-header>
+
+        <p style="text-align: center;">Package Information</p>
+        <table class="table">
+          <!-- <tbody> -->
+            <tr align="left">
+              <th scope="row">Weight</th>
+              <th scope="row">{{pkg.packageWeight}}</th>
+            </tr>
+            <tr align="left">
+              <th scope="row">Number of packages</th>
+              <th scope="row">{{pkg.numberOfPackages}}</th>
+            </tr>
+            <tr align="left">
+              <th scope="row">Content description</th>
+              <th scope="row">{{pkg.packageContentsDescription}}</th>
+            </tr>
+            <tr align="left">
+              <th scope="row">Fragile</th>
+              <th scope="row">{{pkg.fragile}}</th>
+            </tr>
+            <!-- <tr align="left">
+              <th scope="row">Package is returning to sender</th>
+              <th scope="row">{{pkg.isReturn}}</th>
+            </tr> -->
+            <tr align="left">
+              <th scope="row">Sender</th>
+              <th scope="row">
+                {{pkg.sender.firstName}} {{pkg.sender.lastName}}
+                <br/>{{pkg.sender.phoneNumber}}
+                <br/>{{pkg.sender.email}}
+                <ul>
+                  {{pkg.sender.address.address1}}
+                  <br/>{{pkg.sender.address.address2}}
+                  <br/>{{pkg.sender.address.address3}}
+                  <br/>{{pkg.sender.address.apartmentNumber}}
+                  <br/>{{pkg.sender.address.houseNumber}}
+                  <br/>{{pkg.sender.address.postalCode}}
+                  <br/>{{pkg.sender.address.city}}
+                  <br/>{{pkg.sender.address.state}}
+                </ul>
+                {{pkg.sender.company}}
+              </th>
+            </tr>
+
+            <tr align="left">
+              <th scope="row">Receiver</th>
+              <th scope="row">
+                {{pkg.receiver.firstName}} {{pkg.receiver.lastName}}
+                <br/>{{pkg.receiver.phoneNumber}}
+                <br/>{{pkg.receiver.email}}
+                <ul>
+                  {{pkg.receiver.address.address1}}
+                  <br/>{{pkg.receiver.address.address2}}
+                  <br/>{{pkg.receiver.address.address3}}
+                  <br/>{{pkg.receiver.address.apartmentNumber}}
+                  <br/>{{pkg.receiver.address.houseNumber}}
+                  <br/>{{pkg.receiver.address.postalCode}}
+                  <br/>{{pkg.receiver.address.city}}
+                  <br/>{{pkg.receiver.address.state}}
+                </ul>
+                {{pkg.receiver.company}}
+              </th>
+            </tr>
+          <!-- </tbody> -->
+        </table>
+
+
+        <p style="text-align: center;">Package History</p>
+        <table class="table">
+          <thead>
+            <tr align="left">
+              <th scope="col">Package status</th>
+              <th scope="row">Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr align="left">
+              <th scope="row">Package Created</th>
+              <th scope="row">2022-07-23 16:55</th>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr align="left">
+              <th scope="row">Package Pickup Assigned</th>
+              <th scope="row">2022-07-23 17:01</th>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr align="left">
+              <th scope="row">Package Picked up</th>
+              <th scope="row">2022-07-25 08:16</th>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </mat-card>
+
+
+      <!-- <mat-card>
+        <mat-card-header>
+          <mat-card-title>Package tracking</mat-card-title>
+          <mat-card-subtitle>package tracking number</mat-card-subtitle>
+          <img mat-card-avatar src="#"/>
+        </mat-card-header>
+
+        <mat-card-title-group >
+          <mat-card-title>Card title</mat-card-title>
+          <mat-card-subtitle>Card subtitle</mat-card-subtitle>
+          <img mat-card-sm-image src="#"/>
+        </mat-card-title-group>
+
+        <mat-card-content>Card content</mat-card-content>
+      </mat-card> -->
+    </div>
+  </div>
+</div>
