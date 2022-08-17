@@ -11,6 +11,7 @@
             formControlName="username"
           />
         </mat-form-field>
+        <mat-error *ngIf="!form.get('username')?.valid && form.get('username')?.touched">Username is invalid</mat-error>
       </p>
 
       <p>
@@ -22,6 +23,7 @@
             formControlName="password"
           />
         </mat-form-field>
+        <mat-error *ngIf="!form.get('password')?.valid && form.get('password')?.touched">Password is invalid</mat-error>
       </p>
 
       <p>
@@ -33,6 +35,7 @@
             formControlName="firstName"
           />
         </mat-form-field>
+        <mat-error *ngIf="!form.get('firstName')?.valid && form.get('firstName')?.touched">First name is invalid</mat-error>
       </p>
 
       <p>
@@ -44,11 +47,10 @@
             formControlName="lastName"
           />
         </mat-form-field>
+        <mat-error *ngIf="!form.get('lastName')?.valid && form.get('lastName')?.touched">Last name is invalid</mat-error>
       </p>
 
-      <p *ngIf="error" class="error">
-        {{ error }}
-      </p>
+      <p *ngIf="showError()" class="error">{{ showError() }}</p>
 
       <div class="button">
         <button type="submit" mat-button>Register</button>
