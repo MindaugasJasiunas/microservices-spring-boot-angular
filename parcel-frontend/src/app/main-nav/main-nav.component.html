@@ -34,6 +34,11 @@
       <span class="spacer"></span>
 
       <div *ngIf="!(isHandset$ | async)">
+
+        <span *ngIf="getUsername() != null">
+          {{ 'Welcome back ' + getUsername() + '!' }}
+        </span>
+
         <!-- show if big screen -->
         <a mat-list-item>
           <mat-icon aria-label="Side nav toggle icon" routerLink="/"
@@ -45,11 +50,22 @@
             >inventory_2</mat-icon
           >
         </a>
-        <a mat-list-item>
-          <mat-icon aria-label="Side nav toggle icon" routerLink="/login"
-            >login</mat-icon
-          >
-        </a>
+
+        <span *ngIf="getUsername() == null">
+          <a mat-list-item>
+            <mat-icon aria-label="Side nav toggle icon" routerLink="/login"
+              >login</mat-icon
+            >
+          </a>
+        </span>
+        <span *ngIf="getUsername() != null">
+          <a mat-list-item>
+            <mat-icon aria-label="Side nav toggle icon" (click)="logout()"
+              >logout</mat-icon
+            >
+          </a>
+        </span>
+
       </div>
     </mat-toolbar>
     <!-- Add Content Here-->

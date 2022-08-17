@@ -24,9 +24,7 @@
         </mat-form-field>
       </p>
 
-      <p *ngIf="error" class="error">
-        {{ error }}
-      </p>
+      <p *ngIf="showError()" class="error">{{ showError() }}</p>
 
       <div class="button">
         <button type="submit" mat-button>Login</button>
@@ -39,7 +37,7 @@
       </div>
       <div class="info">
         Forgot password?
-        <button mat-flat-button type="button" routerLink="/reset">
+        <button mat-flat-button type="button">
           Reset password
         </button>
       </div>
