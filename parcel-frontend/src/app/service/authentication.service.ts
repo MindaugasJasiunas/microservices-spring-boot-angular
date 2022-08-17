@@ -49,7 +49,7 @@ export class AuthenticationService {
 
   public getAccessToken(refreshToken: string): Observable<HttpResponse<any>> {
     this.isLoggedIn();
-    return this.http.get<string>(this.refreshUrl, {
+    return this.http.post<any>(this.refreshUrl, null, {
       observe: 'response',
       headers: new HttpHeaders({ Authorization: refreshToken }),
     });
