@@ -81,8 +81,8 @@ export class AuthenticationService {
   }
 
   public loadRefreshTokenFromLocalCache(): string {
-    this.accessToken = localStorage.getItem('accessToken')!;
-    return localStorage.getItem('accessToken')!;
+    this.accessToken = localStorage.getItem('refreshToken')!;
+    return localStorage.getItem('refreshToken')!;
   }
 
   public isLoggedIn(): boolean {
@@ -91,7 +91,6 @@ export class AuthenticationService {
     if (this.refreshToken != null && this.refreshToken !== '') {
       if (this.jwtHelper.decodeToken(this.refreshToken).sub != null || '') {
         if (!this.jwtHelper.isTokenExpired(this.refreshToken)) {
-          // this.loggedInUsername = this.jwtHelper.decodeToken(this.token).sub;
           this.addUsernameToLocalCache(
             this.jwtHelper.decodeToken(this.refreshToken).sub
           );
@@ -100,7 +99,7 @@ export class AuthenticationService {
       }
     }
     // if there is no token - logout
-    this.logout();
+    // this.logout(); // getItem from localStorage takes time - immediatelly it will be null - deletes localStorage on every refresh
     return false;
   }
 

@@ -28,7 +28,8 @@ export class AuthInterceptor implements HttpInterceptor {
     if (
       request.url.includes(environment.apiLoginUrl) ||
       request.url.includes(environment.apiRefreshUrl) ||
-      request.url.includes(environment.apiRegisterUrl)
+      request.url.includes(environment.apiRegisterUrl) ||
+      request.url.includes(environment.apiPackageTrackingUrl)
     ) {
       // pass request through
       return next.handle(request);

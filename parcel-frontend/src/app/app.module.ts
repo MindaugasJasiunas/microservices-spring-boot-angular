@@ -16,11 +16,12 @@ import { MatListModule } from '@angular/material/list';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './guard/auth.guard';
 import { PackageInfoComponent } from './packages/package-info/package-info.component';
 import { PackageSendComponent } from './packages/package-send/package-send.component';
+import { AuthInterceptor } from './service/authentication.interceptor';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,13 @@ import { PackageSendComponent } from './packages/package-send/package-send.compo
     MatIconModule,
     MatListModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
