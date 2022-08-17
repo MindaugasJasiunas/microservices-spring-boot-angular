@@ -1,0 +1,177 @@
+<div class="container">
+  <div class="row">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="form-group">
+        <label for="packageContentsDescriptionInput"></label>
+        <input type="text" class="form-control" id="packageContentsDescriptionInput" placeholder="Describe package content in few words" formControlName="packageContentsDesc">
+      </div>
+
+      <div class="form-group">
+        <label for="packageWeightInput"></label>
+        <input type="number" class="form-control" id="packageWeightInput" placeholder="Enter package weight" formControlName="packageWeight">
+      </div>
+
+      <div class="form-group">
+        <label for="packageQtyInput"></label>
+        <input type="number" class="form-control" id="packageQtyInput" placeholder="Enter number of packages" formControlName="packageQuantity">
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="fragileCheck" formControlName="fragile">
+        <label class="form-check-label" for="fragileCheck">Package is fragile</label>
+      </div>
+
+
+      <div>Sender
+        <ul>
+        <div class="form-group">
+          <label for="senderFirstNameInput">First Name</label>
+          <input type="text" class="form-control" id="senderFirstNameInput" placeholder="Enter sender first name" formControlName="senderFirstName">
+        </div>
+        <div class="form-group">
+          <label for="senderLastNameInput">Last Name</label>
+          <input type="text" class="form-control" id="senderLastNameInput" placeholder="Enter sender last name" formControlName="senderLastName">
+        </div>
+        <div class="form-group">
+          <label for="senderPhoneNumberInput">Phone Number</label>
+          <input type="text" class="form-control" id="senderPhoneNumberInput" placeholder="Enter sender phone number" formControlName="senderPhoneNumber">
+        </div>
+        <div class="form-group">
+          <label for="senderEmailInput">Email</label>
+          <input type="text" class="form-control" id="senderEmailInput" placeholder="Enter sender email" formControlName="senderEmail">
+        </div>
+
+        <div>Sender Address
+          <ul>
+          <small class="form-text text-muted">Pre-populated if default address set.</small>
+
+          <div class="form-group">
+            <label for="senderAddress1Input">Address 1</label>
+            <input type="text" class="form-control" id="senderAddress1Input" placeholder="Enter sender address" formControlName="senderAddress1">
+          </div>
+          <div class="form-group">
+            <label for="senderAddress2Input">Address 2</label>
+            <input type="text" class="form-control" id="senderAddress2Input" placeholder="Enter sender address (optional)" formControlName="senderAddress2">
+          </div>
+          <div class="form-group">
+            <label for="senderAddress3Input">Address 3</label>
+            <input type="text" class="form-control" id="senderAddress3Input" placeholder="Enter sender address (optional)" formControlName="senderAddress3">
+          </div>
+
+          <div class="form-group">
+            <label for="senderHouseNumberInput">House Number</label>
+            <input type="number" class="form-control" id="senderHouseNumberInput" placeholder="Enter sender house number" formControlName="senderHouseNumber">
+          </div>
+
+          <div class="form-group">
+            <label for="senderApartmentNumberInput">Apartment Number</label>
+            <input type="number" class="form-control" id="senderApartmentNumberInput" placeholder="Enter sender appartment number" formControlName="senderApartmentNumber">
+          </div>
+
+          <div class="form-group">
+            <label for="senderCityInput">City</label>
+            <input type="text" class="form-control" id="senderCityInput" placeholder="Enter sender city" formControlName="senderCity">
+          </div>
+
+          <div class="form-group">
+            <label for="senderPostalCodeInput">Postal Code</label>
+            <input type="text" class="form-control" id="senderPostalCodeInput" placeholder="Enter sender postal code" formControlName="senderPostalCode">
+          </div>
+
+          <div class="form-group">
+            <label for="senderStateInput">State</label>
+            <input type="text" class="form-control" id="senderStateInput" placeholder="Enter sender state/country" formControlName="senderState">
+          </div>
+
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <label for="senderCompanyInput">Company</label>
+          <input type="text" class="form-control" id="senderCompanyInput" placeholder="Enter sender company (optional)" formControlName="senderCompany">
+        </div>
+
+        </ul>
+      </div>
+
+
+      <div>Receiver
+        <ul>
+        <div class="form-group">
+          <label for="receiverFirstNameInput">First Name</label>
+          <input type="text" class="form-control" id="receiverFirstNameInput" placeholder="Enter receiver first name" formControlName="receiverFirstName">
+        </div>
+        <div class="form-group">
+          <label for="receiverLastNameInput">Last Name</label>
+          <input type="text" class="form-control" id="receiverLastNameInput" placeholder="Enter receiver last name" formControlName="receiverLastName">
+        </div>
+        <div class="form-group">
+          <label for="receiverPhoneNumberInput">Phone Number</label>
+          <input type="text" class="form-control" id="receiverPhoneNumberInput" placeholder="Enter receiver phone number" formControlName="receiverPhoneNumber">
+        </div>
+        <div class="form-group">
+          <label for="receiverEmailInput">Email</label>
+          <input type="text" class="form-control" id="receiverEmailInput" placeholder="Enter receiver email" formControlName="receiverEmail">
+        </div>
+
+        <div>Receiver Address
+          <ul>
+          <small class="form-text text-muted">Pre-populated if default address set.</small>
+
+          <div class="form-group">
+            <label for="receiverAddress1Input">Address 1</label>
+            <input type="text" class="form-control" id="receiverAddress1Input" placeholder="Enter receiver address" formControlName="receiverAddress1">
+          </div>
+          <div class="form-group">
+            <label for="receiverAddress2Input">Address 2</label>
+            <input type="text" class="form-control" id="receiverAddress2Input" placeholder="Enter receiver address (optional)" formControlName="receiverAddress2">
+          </div>
+          <div class="form-group">
+            <label for="receiverAddress3Input">Address 3</label>
+            <input type="text" class="form-control" id="receiverAddress3Input" placeholder="Enter receiver address (optional)" formControlName="receiverAddress3">
+          </div>
+
+          <div class="form-group">
+            <label for="receiverHouseNumberInput">House Number</label>
+            <input type="number" class="form-control" id="receiverHouseNumberInput" placeholder="Enter receiver house number" formControlName="receiverHouseNumber">
+          </div>
+
+          <div class="form-group">
+            <label for="receiverApartmentNumberInput">Apartment Number</label>
+            <input type="number" class="form-control" id="receiverApartmentNumberInput" placeholder="Enter receiver appartment number" formControlName="receiverApartmentNumber">
+          </div>
+
+          <div class="form-group">
+            <label for="receiverCityInput">City</label>
+            <input type="text" class="form-control" id="receiverCityInput" placeholder="Enter receiver city" formControlName="receiverCity">
+          </div>
+
+          <div class="form-group">
+            <label for="receiverPostalCodeInput">Postal Code</label>
+            <input type="text" class="form-control" id="receiverPostalCodeInput" placeholder="Enter receiver postal code" formControlName="receiverPostalCode">
+          </div>
+
+          <div class="form-group">
+            <label for="receiverStateInput">State</label>
+            <input type="text" class="form-control" id="receiverStateInput" placeholder="Enter receiver state/country" formControlName="receiverState">
+          </div>
+
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <label for="receiverCompanyInput">Company</label>
+          <input type="text" class="form-control" id="receiverCompanyInput" placeholder="Enter receiver company (optional)" formControlName="receiverCompany">
+        </div>
+
+        </ul>
+      </div>
+
+      <p *ngIf="showError()" class="error">{{ showError() }}</p>
+
+
+      <button type="submit" class="btn btn-primary">Send new package!</button>
+    </form>
+  </div>
+</div>

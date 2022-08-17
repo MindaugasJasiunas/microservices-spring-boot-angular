@@ -17,16 +17,28 @@
             >home</mat-icon
           >
         </menu>
-        <menu mat-menu-item>
-          <mat-icon aria-label="Side nav toggle icon" routerLink="/sendPackage"
-            >inventory_2</mat-icon
-          >
-        </menu>
-        <menu mat-menu-item>
-          <mat-icon aria-label="Side nav toggle icon" routerLink="/login"
-            >login</mat-icon
-          >
-        </menu>
+
+        <span *ngIf="getUsername() == null">
+          <menu mat-menu-item>
+            <mat-icon aria-label="Side nav toggle icon" routerLink="/login"
+              >login</mat-icon
+            >
+          </menu>
+        </span>
+        <span *ngIf="getUsername() != null">
+          <menu mat-menu-item>
+            <mat-icon aria-label="Side nav toggle icon" routerLink="/send"
+              >inventory_2</mat-icon
+            >
+          </menu>
+          <menu mat-menu-item>
+            <mat-icon aria-label="Side nav toggle icon" (click)="logout()"
+              >logout</mat-icon
+            >
+          </menu>
+        </span>
+
+
       </mat-menu>
 
       <span>materialApp</span>
@@ -45,11 +57,6 @@
             >home</mat-icon
           >
         </a>
-        <a mat-list-item>
-          <mat-icon aria-label="Side nav toggle icon" routerLink="/sendPackage"
-            >inventory_2</mat-icon
-          >
-        </a>
 
         <span *ngIf="getUsername() == null">
           <a mat-list-item>
@@ -59,6 +66,11 @@
           </a>
         </span>
         <span *ngIf="getUsername() != null">
+          <a mat-list-item>
+            <mat-icon aria-label="Side nav toggle icon" routerLink="/send"
+              >inventory_2</mat-icon
+            >
+          </a>
           <a mat-list-item>
             <mat-icon aria-label="Side nav toggle icon" (click)="logout()"
               >logout</mat-icon
