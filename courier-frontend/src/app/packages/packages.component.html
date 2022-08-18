@@ -14,8 +14,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let package of packages">
-        <th scope="row">{{ getCounter() }}</th>
+      <tr *ngFor="let package of packages | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: itemsTotal}; let i = index">
+        <th scope="row">{{ getCounter(i) }}</th>
         <td data-toggle="tooltip" data-placement="right" title="{{package.trackingNumber}}">
           {{package.trackingNumber.slice(0, 4)+'...'+package.trackingNumber.slice(-4)}}
         </td>
@@ -67,23 +67,13 @@
     </tbody>
   </table>
 
-  <nav aria-label="packages navifation">
-    <ul class="pagination justify-content-end">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <ul class="pagination justify-content-end">
+    <pagination-controls
+      (pageChange)="pageChanged($event)"
+      (pageBoundsCorrection)="pageChanged($event)"
+      >
+    </pagination-controls>
+  </ul>
 
 
   <ng-template #loading>
