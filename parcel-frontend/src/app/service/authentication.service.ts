@@ -77,12 +77,12 @@ export class AuthenticationService {
 
   public loadAccessTokenFromLocalCache(): string {
     this.accessToken = localStorage.getItem('accessToken')!;
-    return localStorage.getItem('accessToken')!;
+    return this.accessToken;
   }
 
   public loadRefreshTokenFromLocalCache(): string {
-    this.accessToken = localStorage.getItem('refreshToken')!;
-    return localStorage.getItem('refreshToken')!;
+    this.refreshToken = localStorage.getItem('refreshToken')!;
+    return this.refreshToken;
   }
 
   public isLoggedIn(): boolean {
