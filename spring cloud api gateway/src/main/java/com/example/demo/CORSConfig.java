@@ -40,7 +40,7 @@ public class CORSConfig {
     @Bean
     CorsWebFilter reactiveCorsWebFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        corsConfig.setAllowedOrigins(ImmutableList.of("http://localhost:4200", "http://localhost:4201"));
         corsConfig.setMaxAge(8000L);
         corsConfig.setAllowCredentials(true);
         corsConfig.setAllowedHeaders(Arrays.asList(
