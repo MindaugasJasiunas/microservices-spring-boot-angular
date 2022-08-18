@@ -10,13 +10,17 @@ import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './service/authentication.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
+import { MyPackagesComponent } from './my-packages/my-packages.component';
+import { PackagesComponent } from './packages/packages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    MyPackagesComponent,
+    PackagesComponent
   ],
   imports: [
     HttpClientModule,
