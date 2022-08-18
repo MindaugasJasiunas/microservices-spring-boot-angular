@@ -14,7 +14,7 @@ import { ParcelService } from 'src/app/service/parcel.service';
   styleUrls: ['./package-send.component.css'],
 })
 export class PackageSendComponent implements OnInit, OnDestroy {
-  form: FormGroup = new FormGroup({
+  form: FormGroup = new FormGroup({  // additionally we could group controls
     packageContentsDesc: new FormControl(''),
     packageWeight: new FormControl('', [Validators.required]),
     packageQuantity: new FormControl('', [Validators.required]),
@@ -109,7 +109,7 @@ export class PackageSendComponent implements OnInit, OnDestroy {
         '00000000-0000-0000-0000-000000000000',  // doesn't matter - auto-generated at backend
         '00000000000000000000000000000000',  // doesn't matter - auto-generated at backend
         this.form.get('packageContentsDesc')?.value,
-        'NEW',
+        'NEW',  // doesn't matter - auto-generated at backend
         this.form.get('packageWeight')?.value,
         this.form.get('fragile')?.value,
         false,
@@ -121,9 +121,12 @@ export class PackageSendComponent implements OnInit, OnDestroy {
       this.subscriptions.push(
         this.parcelService.createNewParcel(parcel).subscribe({
             next: (data: HttpResponse<any>)=>{
-              console.log(data);
-              console.log(data.status); // 200
-              console.log(data.statusText); // 'OK'
+              // console.log(data);
+              // console.log(data.status); // 200
+              // console.log(data.statusText); // 'OK'
+              if(data.status !== 200){
+                this.error = 'Error occured while creating package';
+              }
             },
             error: (err: HttpErrorResponse)=> {
               this.error = err.error.message;

@@ -10,11 +10,13 @@
       <div class="form-group">
         <label for="packageWeightInput"></label>
         <input type="number" class="form-control" id="packageWeightInput" placeholder="Enter package weight" formControlName="packageWeight">
+        <span class="help-block" *ngIf="!form.get('packageWeight')?.valid && form.get('packageWeight')?.touched">Please provide a valid package weight</span>
       </div>
 
       <div class="form-group">
         <label for="packageQtyInput"></label>
         <input type="number" class="form-control" id="packageQtyInput" placeholder="Enter number of packages" formControlName="packageQuantity">
+        <span class="help-block" *ngIf="!form.get('packageQuantity')?.valid && form.get('packageQuantity')?.touched">Please provide number of packages</span>
       </div>
 
       <div class="form-check">
@@ -25,21 +27,26 @@
 
       <div>Sender
         <ul>
+          <small class="form-text text-muted">Pre-populated if defaults set.</small>
         <div class="form-group">
           <label for="senderFirstNameInput">First Name</label>
           <input type="text" class="form-control" id="senderFirstNameInput" placeholder="Enter sender first name" formControlName="senderFirstName">
+          <span class="help-block" *ngIf="!form.get('senderFirstName')?.valid && form.get('senderFirstName')?.touched">Please provide sender's first name</span>
         </div>
         <div class="form-group">
           <label for="senderLastNameInput">Last Name</label>
           <input type="text" class="form-control" id="senderLastNameInput" placeholder="Enter sender last name" formControlName="senderLastName">
+          <span class="help-block" *ngIf="!form.get('senderLastName')?.valid && form.get('senderLastName')?.touched">Please provide sender's last name</span>
         </div>
         <div class="form-group">
           <label for="senderPhoneNumberInput">Phone Number</label>
           <input type="text" class="form-control" id="senderPhoneNumberInput" placeholder="Enter sender phone number" formControlName="senderPhoneNumber">
+          <span class="help-block" *ngIf="!form.get('senderPhoneNumber')?.valid && form.get('senderPhoneNumber')?.touched">Please provide sender's phone number</span>
         </div>
         <div class="form-group">
           <label for="senderEmailInput">Email</label>
           <input type="text" class="form-control" id="senderEmailInput" placeholder="Enter sender email" formControlName="senderEmail">
+          <span class="help-block" *ngIf="!form.get('senderEmail')?.valid && form.get('senderEmail')?.touched">Please provide sender's email</span>
         </div>
 
         <div>Sender Address
@@ -49,6 +56,7 @@
           <div class="form-group">
             <label for="senderAddress1Input">Address 1</label>
             <input type="text" class="form-control" id="senderAddress1Input" placeholder="Enter sender address" formControlName="senderAddress1">
+            <span class="help-block" *ngIf="!form.get('senderAddress1')?.valid && form.get('senderAddress1')?.touched">Please provide sender's address</span>
           </div>
           <div class="form-group">
             <label for="senderAddress2Input">Address 2</label>
@@ -62,26 +70,31 @@
           <div class="form-group">
             <label for="senderHouseNumberInput">House Number</label>
             <input type="number" class="form-control" id="senderHouseNumberInput" placeholder="Enter sender house number" formControlName="senderHouseNumber">
+            <span class="help-block" *ngIf="!form.get('senderHouseNumber')?.valid && form.get('senderHouseNumber')?.touched">Please provide sender's house number</span>
           </div>
 
           <div class="form-group">
             <label for="senderApartmentNumberInput">Apartment Number</label>
             <input type="number" class="form-control" id="senderApartmentNumberInput" placeholder="Enter sender appartment number" formControlName="senderApartmentNumber">
+            <span class="help-block" *ngIf="!form.get('senderApartmentNumber')?.valid && form.get('senderApartmentNumber')?.touched">Please provide sender's appartment number. If it is a house, provide - 0</span>
           </div>
 
           <div class="form-group">
             <label for="senderCityInput">City</label>
             <input type="text" class="form-control" id="senderCityInput" placeholder="Enter sender city" formControlName="senderCity">
+            <span class="help-block" *ngIf="!form.get('senderCity')?.valid && form.get('senderCity')?.touched">Please provide sender's city</span>
           </div>
 
           <div class="form-group">
             <label for="senderPostalCodeInput">Postal Code</label>
             <input type="text" class="form-control" id="senderPostalCodeInput" placeholder="Enter sender postal code" formControlName="senderPostalCode">
+            <span class="help-block" *ngIf="!form.get('senderAddress1')?.valid && form.get('senderAddress1')?.touched">Please provide sender's postal code</span>
           </div>
 
           <div class="form-group">
             <label for="senderStateInput">State</label>
             <input type="text" class="form-control" id="senderStateInput" placeholder="Enter sender state/country" formControlName="senderState">
+            <span class="help-block" *ngIf="!form.get('senderAddress1')?.valid && form.get('senderAddress1')?.touched">Please provide sender's state/country</span>
           </div>
 
           </ul>
@@ -101,18 +114,22 @@
         <div class="form-group">
           <label for="receiverFirstNameInput">First Name</label>
           <input type="text" class="form-control" id="receiverFirstNameInput" placeholder="Enter receiver first name" formControlName="receiverFirstName">
+          <span class="help-block" *ngIf="!form.get('receiverFirstName')?.valid && form.get('receiverFirstName')?.touched">Please provide receiver's first name</span>
         </div>
         <div class="form-group">
           <label for="receiverLastNameInput">Last Name</label>
           <input type="text" class="form-control" id="receiverLastNameInput" placeholder="Enter receiver last name" formControlName="receiverLastName">
+          <span class="help-block" *ngIf="!form.get('receiverLastName')?.valid && form.get('receiverLastName')?.touched">Please provide receiver's last name</span>
         </div>
         <div class="form-group">
           <label for="receiverPhoneNumberInput">Phone Number</label>
           <input type="text" class="form-control" id="receiverPhoneNumberInput" placeholder="Enter receiver phone number" formControlName="receiverPhoneNumber">
+          <span class="help-block" *ngIf="!form.get('receiverPhoneNumber')?.valid && form.get('receiverPhoneNumber')?.touched">Please provide receiver's phone number</span>
         </div>
         <div class="form-group">
           <label for="receiverEmailInput">Email</label>
           <input type="text" class="form-control" id="receiverEmailInput" placeholder="Enter receiver email" formControlName="receiverEmail">
+          <span class="help-block" *ngIf="!form.get('receiverEmail')?.valid && form.get('receiverEmail')?.touched">Please provide receiver's email address</span>
         </div>
 
         <div>Receiver Address
@@ -122,6 +139,7 @@
           <div class="form-group">
             <label for="receiverAddress1Input">Address 1</label>
             <input type="text" class="form-control" id="receiverAddress1Input" placeholder="Enter receiver address" formControlName="receiverAddress1">
+            <span class="help-block" *ngIf="!form.get('receiverAddress1')?.valid && form.get('receiverAddress1')?.touched">Please provide receiver's address</span>
           </div>
           <div class="form-group">
             <label for="receiverAddress2Input">Address 2</label>
@@ -135,26 +153,31 @@
           <div class="form-group">
             <label for="receiverHouseNumberInput">House Number</label>
             <input type="number" class="form-control" id="receiverHouseNumberInput" placeholder="Enter receiver house number" formControlName="receiverHouseNumber">
+            <span class="help-block" *ngIf="!form.get('receiverHouseNumber')?.valid && form.get('receiverHouseNumber')?.touched">Please provide receiver's house number</span>
           </div>
 
           <div class="form-group">
             <label for="receiverApartmentNumberInput">Apartment Number</label>
             <input type="number" class="form-control" id="receiverApartmentNumberInput" placeholder="Enter receiver appartment number" formControlName="receiverApartmentNumber">
+            <span class="help-block" *ngIf="!form.get('receiverApartmentNumber')?.valid && form.get('receiverApartmentNumber')?.touched">Please provide receiver's apartment number</span>
           </div>
 
           <div class="form-group">
             <label for="receiverCityInput">City</label>
             <input type="text" class="form-control" id="receiverCityInput" placeholder="Enter receiver city" formControlName="receiverCity">
+            <span class="help-block" *ngIf="!form.get('receiverCity')?.valid && form.get('receiverCity')?.touched">Please provide receiver's city</span>
           </div>
 
           <div class="form-group">
             <label for="receiverPostalCodeInput">Postal Code</label>
             <input type="text" class="form-control" id="receiverPostalCodeInput" placeholder="Enter receiver postal code" formControlName="receiverPostalCode">
+            <span class="help-block" *ngIf="!form.get('receiverPostalCode')?.valid && form.get('receiverPostalCode')?.touched">Please provide receiver's postal code</span>
           </div>
 
           <div class="form-group">
             <label for="receiverStateInput">State</label>
             <input type="text" class="form-control" id="receiverStateInput" placeholder="Enter receiver state/country" formControlName="receiverState">
+            <span class="help-block" *ngIf="!form.get('receiverState')?.valid && form.get('receiverState')?.touched">Please provide receiver's state/country</span>
           </div>
 
           </ul>
