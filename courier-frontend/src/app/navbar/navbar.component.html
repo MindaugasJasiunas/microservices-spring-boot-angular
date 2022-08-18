@@ -1,0 +1,16 @@
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+  <a class="navbar-brand" routerLink="/">Parcel Delivery platform</a>
+  <a class="navlink" routerLink="/">Home</a>
+  <a class="navlink" routerLink="/my-packages">My Parcels</a>
+  <a class="navlink" routerLink="/packages">All Parcels</a>
+
+  <span class="navbar-text">
+    <span *ngIf="getUsername() != null">
+      Hello courier {{getUsername()}}
+      <i class="bi bi-box-arrow-right" (click)="logout()"></i>
+    </span>
+    <span *ngIf="getUsername() == null">
+      <i class="bi bi-box-arrow-in-right" routerLink="/login"></i>
+    </span>
+  </span>
+</nav>

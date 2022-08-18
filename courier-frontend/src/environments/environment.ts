@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:9090/', // Spring Cloud API Gateway entrypoint
+  apiLoginUrl: 'http://localhost:9090/login',
+  apiRegisterUrl: 'http://localhost:9090/register',
+  apiRefreshUrl: 'http://localhost:9090/resettoken',
 };
 
 /*
