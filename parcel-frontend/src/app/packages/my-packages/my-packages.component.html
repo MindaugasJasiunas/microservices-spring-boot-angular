@@ -1,0 +1,14 @@
+<div class="container" *ngIf="packages$ | async as packages">
+  <div class="row">
+    <h2>My packages</h2>
+    <mat-list>
+    <mat-list-item *ngFor="let package of packages">
+         <img [src]="'https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'" matListAvatar alt="">
+          <div matLine>{{ package.publicId }}</div>
+           <div matLine>Tracking number: {{ package.trackingNumber }}</div>
+            <div matLine>Status : {{ package.packageStatus }}</div>
+        <div matLine>{{ package.packageContentsDescription }}</div>
+    </mat-list-item>
+  </mat-list>
+  </div>
+</div>

@@ -22,6 +22,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { PackageInfoComponent } from './packages/package-info/package-info.component';
 import { PackageSendComponent } from './packages/package-send/package-send.component';
 import { AuthInterceptor } from './service/authentication.interceptor';
+import { MyPackagesComponent } from './packages/my-packages/my-packages.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AuthInterceptor } from './service/authentication.interceptor';
     LoginComponent,
     RegisterComponent,
     PackageInfoComponent,
-    PackageSendComponent
+    PackageSendComponent,
+    MyPackagesComponent
   ],
   imports: [
     HttpClientModule,

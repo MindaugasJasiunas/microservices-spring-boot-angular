@@ -27,8 +27,13 @@
         </span>
         <span *ngIf="getUsername() != null">
           <menu mat-menu-item>
-            <mat-icon aria-label="Side nav toggle icon" routerLink="/send"
+            <mat-icon aria-label="Side nav toggle icon" routerLink="/packages"
               >inventory_2</mat-icon
+            >
+          </menu>
+          <menu mat-menu-item>
+            <mat-icon aria-label="Side nav toggle icon" routerLink="/send"
+              >local_shipping</mat-icon
             >
           </menu>
           <menu mat-menu-item>
@@ -67,8 +72,13 @@
         </span>
         <span *ngIf="getUsername() != null">
           <a mat-list-item>
-            <mat-icon aria-label="Side nav toggle icon" routerLink="/send"
+            <mat-icon aria-label="Side nav toggle icon" routerLink="/packages"
               >inventory_2</mat-icon
+            >
+          </a>
+          <a mat-list-item>
+            <mat-icon aria-label="Side nav toggle icon" routerLink="/send"
+              >local_shipping</mat-icon
             >
           </a>
           <a mat-list-item>
