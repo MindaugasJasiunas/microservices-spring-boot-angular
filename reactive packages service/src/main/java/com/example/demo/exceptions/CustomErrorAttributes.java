@@ -19,7 +19,7 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
         Map<String, Object> errorAttributesMap = super.getErrorAttributes(request, options);
         Throwable throwable = getError(request);
 
-        log.debug("[PackagesService][ERROR] Error occured. Throwable: " + throwable);
+        log.debug("[PackagesService][ERROR] Error occurred. Throwable: " + throwable);
 
         if(throwable instanceof ResponseStatusException){
             ResponseStatusException ex = (ResponseStatusException) throwable;
