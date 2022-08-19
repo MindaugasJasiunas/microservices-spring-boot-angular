@@ -14,6 +14,7 @@ public interface PackageService {
     Mono<Package> findPackageByPublicId(UUID publicId);
     Mono<Package> findPackageByTrackingNumber(String trackingNumber);
     Mono<CustomPageImpl<Package>> findAll(PageRequest pageRequest);
+    Mono<Long> getPackageCount();
 
     PackageValidator.ValidationResult isPackageValid(Package pkg);
 

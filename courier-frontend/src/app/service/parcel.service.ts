@@ -9,6 +9,7 @@ import { Package } from '../model/package.model';
 })
 export class ParcelService {
   private getParcelsUrl = environment.apiPackagesUrl;
+  private getParcelsCountUrl = environment.apiPackagesCountUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -21,11 +22,13 @@ export class ParcelService {
   }
 
   public getTotalParcels(): Observable<number> {
-    // mock
-    return new Observable( (obs: Subscriber<number>) => {
-      obs.next(10);
-      obs.complete();
-    })
+    return this.http.get<number>(
+      this.getParcelsCountUrl, {
+        observe: 'response',
+      }
+    ).pipe(map((response: HttpResponse<number>) => {
+      return response.body as number;
+    }));
   }
 
   // public updateParcel(parcel: Package): Observable<HttpResponse<any>> {

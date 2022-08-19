@@ -56,6 +56,10 @@ public class PackageServiceImpl implements PackageService{
                 .map(tuple -> new CustomPageImpl<>(tuple.getT1(), pageRequest, tuple.getT2()));
     }
 
+    @Override
+    public Mono<Long> getPackageCount(){
+        return packageRepository.count();
+    }
 
     @Override
     public Mono<Package> populateNewPackage(Package newPackage) {

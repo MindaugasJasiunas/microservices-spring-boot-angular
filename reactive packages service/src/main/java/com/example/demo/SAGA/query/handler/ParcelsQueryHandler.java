@@ -1,5 +1,6 @@
 package com.example.demo.SAGA.query.handler;
 
+import com.example.demo.SAGA.query.queries.FindParcelCountQuery;
 import com.example.demo.SAGA.query.queries.FindParcelQuery;
 import com.example.demo.SAGA.query.queries.FindParcelsQuery;
 import com.example.demo.domain.Package;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -30,6 +32,12 @@ public class ParcelsQueryHandler {
     public CompletableFuture<Package> findProduct(FindParcelQuery query) {
         log.debug("[ParcelsQueryHandler] findProduct("+query.getClass().getName()+"(trackingNumber: "+query.getTrackingNumber()+")) called");
         return packageService.findPackageByTrackingNumber(query.getTrackingNumber()).toFuture();
+    }
+
+    @QueryHandler
+    public CompletableFuture<Long> findProductCount(FindParcelCountQuery query){
+        log.debug("[ParcelsQueryHandler] findProductCount() called");
+        return packageService.getPackageCount().toFuture();
     }
 
 }

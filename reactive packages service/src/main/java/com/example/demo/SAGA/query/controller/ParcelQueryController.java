@@ -1,5 +1,6 @@
 package com.example.demo.SAGA.query.controller;
 
+import com.example.demo.SAGA.query.queries.FindParcelCountQuery;
 import com.example.demo.SAGA.query.queries.FindParcelQuery;
 import com.example.demo.SAGA.query.queries.FindParcelsQuery;
 import com.example.demo.util.PageResponseType;
@@ -22,7 +23,7 @@ import reactor.core.publisher.Mono;
 public class ParcelQueryController {
     private final ReactorQueryGateway reactiveQueryGateway;
 
-    @GetMapping("/{trackingNumber}")
+    @GetMapping("/tracking/{trackingNumber}")
     public Mono<Package> getParcelByTrackingNumber(FindParcelQuery query, @PathVariable("trackingNumber") String trackingNumber){
         query.setTrackingNumber(trackingNumber);
         return reactiveQueryGateway.query(query, ResponseTypes.instanceOf(Package.class));
@@ -36,5 +37,11 @@ public class ParcelQueryController {
         final ResponseType<Page<Package>> responseType = new PageResponseType<>(Package.class);
         final Mono<Page<Package>> resultFuture = reactiveQueryGateway.query(query, responseType);
         return resultFuture;
+    }
+
+    @GetMapping("/count")
+    public Mono<Long> getParcelCount(){
+        FindParcelCountQuery query = new FindParcelCountQuery();
+        return reactiveQueryGateway.query(query, Long.class);
     }
 }

@@ -16,7 +16,7 @@ export class MyPackagesComponent implements OnInit {
 
   constructor(private parcelService: ParcelService) {
     this.packages$ = this.parcelService.getParcels(
-      this.currentPage,
+      this.currentPage - 1,
       this.pageSize
     );
     this.parcelService.getTotalParcels().subscribe({

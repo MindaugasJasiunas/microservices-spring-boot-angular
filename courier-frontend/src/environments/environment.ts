@@ -8,6 +8,7 @@ export const environment = {
   apiLoginUrl: 'http://localhost:9090/login',
   apiRefreshUrl: 'http://localhost:9090/resettoken',
   apiPackagesUrl: 'http://localhost:9090/parcels',
+  apiPackagesCountUrl: 'http://localhost:9090/parcels/count',
 };
 
 /*
