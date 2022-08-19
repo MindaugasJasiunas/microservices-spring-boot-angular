@@ -1,3 +1,13 @@
+<div class="container" *ngIf="nonExistentPackage || serverError">
+  <div class="row">
+    <div class="col">
+      <div class="alert alert-danger" role="alert" style="margin-top: 15px;">
+        {{ nonExistentPackage? PACKAGE_DOES_NOT_EXIST_MSG : SERVER_ERROR_MSG }}
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container" *ngIf="parcel$ | async as pkg">
   <div class="row">
     <div class="col">
