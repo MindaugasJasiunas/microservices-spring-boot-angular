@@ -9,7 +9,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, take, tap, switchMap, throwError } from 'rxjs';
+import { Observable, take, tap, switchMap, throwError, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './authentication.service';
 
@@ -54,6 +54,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
       return this.authService.getAccessToken(refreshToken).pipe(
         take(1),
+        // if authentication service is down - can't refresh token - automatically logout
+        catchError(
+          (error: HttpErrorResponse): Observable<any> => {
+              this.authService.logout();
+              return throwError(() => error);
+          },
+        ),
         tap((response: HttpResponse<any>) => {
           this.authService.saveAccessToken(
             response.headers.get('authorization')!
