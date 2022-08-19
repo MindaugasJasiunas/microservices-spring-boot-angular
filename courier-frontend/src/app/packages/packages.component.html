@@ -1,5 +1,10 @@
 <div class="container" style="margin: 50px">
-
+  <p>Items per page
+    <a class="btn btn-primary" (click)="changeItemsPerPage(1)">1</a>
+    <a class="btn btn-primary" (click)="changeItemsPerPage(2)">2</a>
+    <a class="btn btn-primary" (click)="changeItemsPerPage(5)">5</a>
+    <a class="btn btn-primary" (click)="changeItemsPerPage(10)">10</a>
+  </p>
   <table class="table table-striped" *ngIf="packages$ | async as packages; else loading">
     <thead>
       <tr>

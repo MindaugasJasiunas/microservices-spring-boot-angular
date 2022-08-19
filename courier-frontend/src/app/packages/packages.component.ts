@@ -13,7 +13,7 @@ import { ParcelService } from '../service/parcel.service';
 })
 export class PackagesComponent implements OnInit {
   currentPage: number = 1;
-  pageSize: number = 2;
+  pageSize: number = 5;
   itemsTotal: number = 0; // from DB
   packages$: Observable<Package[]>;
 
@@ -43,5 +43,12 @@ export class PackagesComponent implements OnInit {
       this.currentPage-1,
       this.pageSize
     );
+  }
+
+  changeItemsPerPage(itemsPerPage: number){
+    if(itemsPerPage <= 10){ // defence check to protect server
+      this.pageSize = itemsPerPage;
+      this.pageChanged(1);
+    }
   }
 }
