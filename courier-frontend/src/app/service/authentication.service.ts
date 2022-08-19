@@ -87,7 +87,7 @@ export class AuthenticationService {
       }
     }
     // if there is no token - logout
-    this.logout(); // getItem from localStorage takes time - immediatelly it will be null - deletes localStorage on every refresh
+    this.logout();
     return false;
   }
 
