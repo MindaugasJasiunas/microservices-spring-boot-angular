@@ -3,3 +3,10 @@
   color: white;
   background-color: red;
 }
+mat-form-field {
+  padding: .375rem .75rem;
+  width: 100%;
+}
+.checkbox-margin {
+  margin: 0 12px;
+}

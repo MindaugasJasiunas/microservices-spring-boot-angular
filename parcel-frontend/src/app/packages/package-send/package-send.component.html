@@ -1,109 +1,122 @@
 <div class="container">
   <div class="row">
+    <h2>Send package</h2>
     <form [formGroup]="form" (ngSubmit)="submit()">
 
-      <div class="form-group">
-        <label for="packageContentsDescriptionInput"></label>
-        <input type="text" class="form-control" id="packageContentsDescriptionInput" placeholder="Describe package content in few words" formControlName="packageContentsDesc">
-      </div>
+      <p>
+        <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="packageContentsDescriptionInput">Contents Description</mat-label>
+            <input matInput type="text" id="packageContentsDescriptionInput" placeholder="Describe package content in few words" formControlName="packageContentsDesc">
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <mat-hint>Hint</mat-hint> -->
+        </mat-form-field>
+      </p>
 
-      <div class="form-group">
-        <label for="packageWeightInput"></label>
-        <input type="number" class="form-control" id="packageWeightInput" placeholder="Enter package weight" formControlName="packageWeight">
-        <span class="help-block" *ngIf="!form.get('packageWeight')?.valid && form.get('packageWeight')?.touched">Please provide a valid package weight</span>
-      </div>
+      <p>
+        <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="packageWeightInput">Package Weight</mat-label>
+            <input matInput type="number" id="packageWeightInput" placeholder="Enter package weight" formControlName="packageWeight">
+            <mat-hint *ngIf="!form.get('packageWeight')?.valid && form.get('packageWeight')?.touched">Please provide a valid package weight</mat-hint>
+        </mat-form-field>
+      </p>
 
-      <div class="form-group">
-        <label for="packageQtyInput"></label>
-        <input type="number" class="form-control" id="packageQtyInput" placeholder="Enter number of packages" formControlName="packageQuantity">
-        <span class="help-block" *ngIf="!form.get('packageQuantity')?.valid && form.get('packageQuantity')?.touched">Please provide number of packages</span>
-      </div>
+      <p>
+        <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="packageQtyInput">Number of packages</mat-label>
+            <input matInput type="number" class="form-control" id="packageQtyInput" placeholder="Enter number of packages" formControlName="packageQuantity">
+            <mat-hint *ngIf="!form.get('packageQuantity')?.valid && form.get('packageQuantity')?.touched">Please provide number of packages</mat-hint>
+        </mat-form-field>
+      </p>
 
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="fragileCheck" formControlName="fragile">
-        <label class="form-check-label" for="fragileCheck">Package is fragile</label>
-      </div>
-
+      <p>
+        <mat-checkbox class="checkbox-margin" id="fragileCheck" formControlName="fragile">Package is fragile</mat-checkbox>
+      </p>
 
       <div>Sender
         <ul>
           <small class="form-text text-muted">Pre-populated if defaults set.</small>
-        <div class="form-group">
-          <label for="senderFirstNameInput">First Name</label>
-          <input type="text" class="form-control" id="senderFirstNameInput" placeholder="Enter sender first name" formControlName="senderFirstName">
-          <span class="help-block" *ngIf="!form.get('senderFirstName')?.valid && form.get('senderFirstName')?.touched">Please provide sender's first name</span>
-        </div>
-        <div class="form-group">
-          <label for="senderLastNameInput">Last Name</label>
-          <input type="text" class="form-control" id="senderLastNameInput" placeholder="Enter sender last name" formControlName="senderLastName">
-          <span class="help-block" *ngIf="!form.get('senderLastName')?.valid && form.get('senderLastName')?.touched">Please provide sender's last name</span>
-        </div>
-        <div class="form-group">
-          <label for="senderPhoneNumberInput">Phone Number</label>
-          <input type="text" class="form-control" id="senderPhoneNumberInput" placeholder="Enter sender phone number" formControlName="senderPhoneNumber">
-          <span class="help-block" *ngIf="!form.get('senderPhoneNumber')?.valid && form.get('senderPhoneNumber')?.touched">Please provide sender's phone number</span>
-        </div>
-        <div class="form-group">
-          <label for="senderEmailInput">Email</label>
-          <input type="text" class="form-control" id="senderEmailInput" placeholder="Enter sender email" formControlName="senderEmail">
-          <span class="help-block" *ngIf="!form.get('senderEmail')?.valid && form.get('senderEmail')?.touched">Please provide sender's email</span>
-        </div>
+
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="senderFirstNameInput">Sender First Name</mat-label>
+            <input matInput type="text" id="senderFirstNameInput" placeholder="Enter sender first name" formControlName="senderFirstName">
+            <mat-hint *ngIf="!form.get('senderFirstName')?.valid && form.get('senderFirstName')?.touched">Please provide sender's first name</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="senderLastNameInput">Sender Last Name</mat-label>
+            <input matInput type="text" id="senderLastNameInput" placeholder="Enter sender last name" formControlName="senderLastName">
+            <mat-hint *ngIf="!form.get('senderLastName')?.valid && form.get('senderLastName')?.touched">Please provide sender's last name</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="senderPhoneNumberInput">Sender Phone Number</mat-label>
+            <input matInput type="text" id="senderPhoneNumberInput" placeholder="Enter sender phone number" formControlName="senderPhoneNumber">
+            <mat-hint *ngIf="!form.get('senderPhoneNumber')?.valid && form.get('senderPhoneNumber')?.touched">Please provide sender's phone number</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="senderEmailInput">Sender Email</mat-label>
+            <input matInput type="text" id="senderEmailInput" placeholder="Enter sender email" formControlName="senderEmail">
+            <mat-hint *ngIf="!form.get('senderEmail')?.valid && form.get('senderEmail')?.touched">Please provide sender's email</mat-hint>
+          </mat-form-field>
 
         <div>Sender Address
           <ul>
           <small class="form-text text-muted">Pre-populated if default address set.</small>
 
-          <div class="form-group">
-            <label for="senderAddress1Input">Address 1</label>
-            <input type="text" class="form-control" id="senderAddress1Input" placeholder="Enter sender address" formControlName="senderAddress1">
-            <span class="help-block" *ngIf="!form.get('senderAddress1')?.valid && form.get('senderAddress1')?.touched">Please provide sender's address</span>
-          </div>
-          <div class="form-group">
-            <label for="senderAddress2Input">Address 2</label>
-            <input type="text" class="form-control" id="senderAddress2Input" placeholder="Enter sender address (optional)" formControlName="senderAddress2">
-          </div>
-          <div class="form-group">
-            <label for="senderAddress3Input">Address 3</label>
-            <input type="text" class="form-control" id="senderAddress3Input" placeholder="Enter sender address (optional)" formControlName="senderAddress3">
-          </div>
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="senderAddress1Input">Address 1</mat-label>
+            <input matInput type="text" id="senderAddress1Input" placeholder="Enter sender address" formControlName="senderAddress1">
+            <mat-hint *ngIf="!form.get('senderAddress1')?.valid && form.get('senderAddress1')?.touched">Please provide sender's address</mat-hint>
+          </mat-form-field>
 
-          <div class="form-group">
-            <label for="senderHouseNumberInput">House Number</label>
-            <input type="number" class="form-control" id="senderHouseNumberInput" placeholder="Enter sender house number" formControlName="senderHouseNumber">
-            <span class="help-block" *ngIf="!form.get('senderHouseNumber')?.valid && form.get('senderHouseNumber')?.touched">Please provide sender's house number</span>
-          </div>
+          <mat-form-field appearance="fill">
+            <mat-label for="senderAddress2Input">Address 2</mat-label>
+            <input matInput type="text" id="senderAddress2Input" placeholder="Enter sender address (optional)" formControlName="senderAddress2">
+          </mat-form-field>
 
-          <div class="form-group">
-            <label for="senderApartmentNumberInput">Apartment Number</label>
-            <input type="number" class="form-control" id="senderApartmentNumberInput" placeholder="Enter sender appartment number" formControlName="senderApartmentNumber">
-            <span class="help-block" *ngIf="!form.get('senderApartmentNumber')?.valid && form.get('senderApartmentNumber')?.touched">Please provide sender's appartment number. If it is a house, provide - 0</span>
-          </div>
+          <mat-form-field appearance="fill">
+            <mat-label for="senderAddress3Input">Address 3</mat-label>
+            <input matInput type="text" id="senderAddress3Input" placeholder="Enter sender address (optional)" formControlName="senderAddress3">
+          </mat-form-field>
 
-          <div class="form-group">
-            <label for="senderCityInput">City</label>
-            <input type="text" class="form-control" id="senderCityInput" placeholder="Enter sender city" formControlName="senderCity">
-            <span class="help-block" *ngIf="!form.get('senderCity')?.valid && form.get('senderCity')?.touched">Please provide sender's city</span>
-          </div>
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="senderHouseNumberInput">House Number</mat-label>
+            <input matInput type="number" id="senderHouseNumberInput" placeholder="Enter sender house number" formControlName="senderHouseNumber">
+            <mat-hint *ngIf="!form.get('senderHouseNumber')?.valid && form.get('senderHouseNumber')?.touched">Please provide sender's house number</mat-hint>
+          </mat-form-field>
 
-          <div class="form-group">
-            <label for="senderPostalCodeInput">Postal Code</label>
-            <input type="text" class="form-control" id="senderPostalCodeInput" placeholder="Enter sender postal code" formControlName="senderPostalCode">
-            <span class="help-block" *ngIf="!form.get('senderAddress1')?.valid && form.get('senderAddress1')?.touched">Please provide sender's postal code</span>
-          </div>
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="senderApartmentNumberInput">Apartment Number</mat-label>
+            <input matInput type="number" id="senderApartmentNumberInput" placeholder="Enter sender appartment number" formControlName="senderApartmentNumber">
+            <mat-hint *ngIf="!form.get('senderApartmentNumber')?.valid && form.get('senderApartmentNumber')?.touched">Please provide sender's appartment number. If it is a house, provide - 0</mat-hint>
+          </mat-form-field>
 
-          <div class="form-group">
-            <label for="senderStateInput">State</label>
-            <input type="text" class="form-control" id="senderStateInput" placeholder="Enter sender state/country" formControlName="senderState">
-            <span class="help-block" *ngIf="!form.get('senderAddress1')?.valid && form.get('senderAddress1')?.touched">Please provide sender's state/country</span>
-          </div>
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="senderCityInput">City</mat-label>
+            <input matInput type="text" id="senderCityInput" placeholder="Enter sender city" formControlName="senderCity">
+            <mat-hint *ngIf="!form.get('senderCity')?.valid && form.get('senderCity')?.touched">Please provide sender's city</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="senderPostalCodeInput">Postal Code</mat-label>
+            <input matInput type="text" id="senderPostalCodeInput" placeholder="Enter sender postal code" formControlName="senderPostalCode">
+            <mat-hint *ngIf="!form.get('senderPostalCode')?.valid && form.get('senderPostalCode')?.touched">Please provide sender's postal code</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="senderStateInput">State</mat-label>
+            <input matInput type="text" id="senderStateInput" placeholder="Enter sender state/country" formControlName="senderState">
+            <mat-hint *ngIf="!form.get('senderState')?.valid && form.get('senderState')?.touched">Please provide sender's state/country</mat-hint>
+          </mat-form-field>
 
           </ul>
         </div>
 
-        <div class="form-group">
-          <label for="senderCompanyInput">Company</label>
-          <input type="text" class="form-control" id="senderCompanyInput" placeholder="Enter sender company (optional)" formControlName="senderCompany">
-        </div>
+        <mat-form-field appearance="fill">
+          <mat-label for="senderCompanyInput">Sender Company</mat-label>
+          <input matInput type="text" id="senderCompanyInput" placeholder="Enter sender company (optional)" formControlName="senderCompany">
+        </mat-form-field>
 
         </ul>
       </div>
@@ -111,90 +124,96 @@
 
       <div>Receiver
         <ul>
-        <div class="form-group">
-          <label for="receiverFirstNameInput">First Name</label>
-          <input type="text" class="form-control" id="receiverFirstNameInput" placeholder="Enter receiver first name" formControlName="receiverFirstName">
-          <span class="help-block" *ngIf="!form.get('receiverFirstName')?.valid && form.get('receiverFirstName')?.touched">Please provide receiver's first name</span>
-        </div>
-        <div class="form-group">
-          <label for="receiverLastNameInput">Last Name</label>
-          <input type="text" class="form-control" id="receiverLastNameInput" placeholder="Enter receiver last name" formControlName="receiverLastName">
-          <span class="help-block" *ngIf="!form.get('receiverLastName')?.valid && form.get('receiverLastName')?.touched">Please provide receiver's last name</span>
-        </div>
-        <div class="form-group">
-          <label for="receiverPhoneNumberInput">Phone Number</label>
-          <input type="text" class="form-control" id="receiverPhoneNumberInput" placeholder="Enter receiver phone number" formControlName="receiverPhoneNumber">
-          <span class="help-block" *ngIf="!form.get('receiverPhoneNumber')?.valid && form.get('receiverPhoneNumber')?.touched">Please provide receiver's phone number</span>
-        </div>
-        <div class="form-group">
-          <label for="receiverEmailInput">Email</label>
-          <input type="text" class="form-control" id="receiverEmailInput" placeholder="Enter receiver email" formControlName="receiverEmail">
-          <span class="help-block" *ngIf="!form.get('receiverEmail')?.valid && form.get('receiverEmail')?.touched">Please provide receiver's email address</span>
-        </div>
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="receiverFirstName">Receiver First Name</mat-label>
+            <input matInput type="text" id="receiverFirstNameInput" placeholder="Enter receiver first name" formControlName="receiverFirstName">
+            <mat-hint *ngIf="!form.get('receiverFirstName')?.valid && form.get('receiverFirstName')?.touched">Please provide receiver's first name</mat-hint>
+          </mat-form-field>
 
-        <div>Receiver Address
-          <ul>
-          <small class="form-text text-muted">Pre-populated if default address set.</small>
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="receiverLastNameInput">Receiver Last Name</mat-label>
+            <input matInput type="text" id="receiverLastNameInput" placeholder="Enter receiver last name" formControlName="receiverLastName">
+            <mat-hint *ngIf="!form.get('receiverLastName')?.valid && form.get('receiverLastName')?.touched">Please provide receiver's last name</mat-hint>
+          </mat-form-field>
 
-          <div class="form-group">
-            <label for="receiverAddress1Input">Address 1</label>
-            <input type="text" class="form-control" id="receiverAddress1Input" placeholder="Enter receiver address" formControlName="receiverAddress1">
-            <span class="help-block" *ngIf="!form.get('receiverAddress1')?.valid && form.get('receiverAddress1')?.touched">Please provide receiver's address</span>
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="receiverPhoneNumberInput">Receiver Phone Number</mat-label>
+            <input matInput type="text" id="receiverPhoneNumberInput" placeholder="Enter receiver phone number" formControlName="receiverPhoneNumber">
+            <mat-hint *ngIf="!form.get('receiverPhoneNumber')?.valid && form.get('receiverPhoneNumber')?.touched">Please provide receiver's phone number</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" required hideRequiredMarker>
+            <mat-label for="receiverEmailInput">Receiver Email</mat-label>
+            <input matInput type="text" id="receiverEmailInput" placeholder="Enter receiver email" formControlName="receiverEmail">
+            <mat-hint *ngIf="!form.get('receiverEmail')?.valid && form.get('receiverEmail')?.touched">Please provide receiver's email address</mat-hint>
+          </mat-form-field>
+
+
+          <div>Receiver Address
+            <ul>
+              <small class="form-text text-muted">Pre-populated if default address set.</small>
+
+              <mat-form-field appearance="fill" required hideRequiredMarker>
+                <mat-label for="receiverAddress1Input">Address 1</mat-label>
+                <input matInput type="text" id="receiverAddress1Input" placeholder="Enter receiver address" formControlName="receiverAddress1">
+                <mat-hint *ngIf="!form.get('receiverAddress1')?.valid && form.get('receiverAddress1')?.touched">Please provide receiver's address</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label for="receiverAddress2Input">Address 2</mat-label>
+                <input matInput type="text" id="receiverAddress2Input" placeholder="Enter receiver address (optional)" formControlName="receiverAddress2">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label for="receiverAddress3Input">Address 3</mat-label>
+                <input matInput type="text" id="receiverAddress3Input" placeholder="Enter receiver address (optional)" formControlName="receiverAddress3">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" required hideRequiredMarker>
+                <mat-label for="receiverHouseNumberInput">House Number</mat-label>
+                <input matInput type="number" id="receiverHouseNumberInput" placeholder="Enter receiver house number" formControlName="receiverHouseNumber">
+                <mat-hint *ngIf="!form.get('receiverHouseNumber')?.valid && form.get('receiverHouseNumber')?.touched">Please provide receiver's house number</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" required hideRequiredMarker>
+                <mat-label for="receiverApartmentNumberInput">Apartment Number</mat-label>
+                <input matInput type="number" id="receiverApartmentNumberInput" placeholder="Enter receiver appartment number" formControlName="receiverApartmentNumber">
+                <mat-hint *ngIf="!form.get('receiverApartmentNumber')?.valid && form.get('receiverApartmentNumber')?.touched">Please provide receiver's apartment number</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" required hideRequiredMarker>
+                <mat-label for="receiverCityInput">City</mat-label>
+                <input matInput type="text" id="receiverCityInput" placeholder="Enter receiver city" formControlName="receiverCity">
+                <mat-hint *ngIf="!form.get('receiverCity')?.valid && form.get('receiverCity')?.touched">Please provide receiver's city</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" required hideRequiredMarker>
+                <mat-label for="receiverPostalCode">Postal Code</mat-label>
+                <input matInput type="text" id="receiverPostalCodeInput" placeholder="Enter receiver postal code" formControlName="receiverPostalCode">
+                <mat-hint *ngIf="!form.get('receiverPostalCode')?.valid && form.get('receiverPostalCode')?.touched">Please provide receiver's postal code</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" required hideRequiredMarker>
+                <mat-label for="receiverStateInput">State</mat-label>
+                <input matInput type="text" id="receiverStateInput" placeholder="Enter receiver state/country" formControlName="receiverState">
+                <mat-hint *ngIf="!form.get('receiverState')?.valid && form.get('receiverState')?.touched">Please provide receiver's state/country</mat-hint>
+              </mat-form-field>
+
+            </ul>
           </div>
-          <div class="form-group">
-            <label for="receiverAddress2Input">Address 2</label>
-            <input type="text" class="form-control" id="receiverAddress2Input" placeholder="Enter receiver address (optional)" formControlName="receiverAddress2">
-          </div>
-          <div class="form-group">
-            <label for="receiverAddress3Input">Address 3</label>
-            <input type="text" class="form-control" id="receiverAddress3Input" placeholder="Enter receiver address (optional)" formControlName="receiverAddress3">
-          </div>
 
-          <div class="form-group">
-            <label for="receiverHouseNumberInput">House Number</label>
-            <input type="number" class="form-control" id="receiverHouseNumberInput" placeholder="Enter receiver house number" formControlName="receiverHouseNumber">
-            <span class="help-block" *ngIf="!form.get('receiverHouseNumber')?.valid && form.get('receiverHouseNumber')?.touched">Please provide receiver's house number</span>
-          </div>
-
-          <div class="form-group">
-            <label for="receiverApartmentNumberInput">Apartment Number</label>
-            <input type="number" class="form-control" id="receiverApartmentNumberInput" placeholder="Enter receiver appartment number" formControlName="receiverApartmentNumber">
-            <span class="help-block" *ngIf="!form.get('receiverApartmentNumber')?.valid && form.get('receiverApartmentNumber')?.touched">Please provide receiver's apartment number</span>
-          </div>
-
-          <div class="form-group">
-            <label for="receiverCityInput">City</label>
-            <input type="text" class="form-control" id="receiverCityInput" placeholder="Enter receiver city" formControlName="receiverCity">
-            <span class="help-block" *ngIf="!form.get('receiverCity')?.valid && form.get('receiverCity')?.touched">Please provide receiver's city</span>
-          </div>
-
-          <div class="form-group">
-            <label for="receiverPostalCodeInput">Postal Code</label>
-            <input type="text" class="form-control" id="receiverPostalCodeInput" placeholder="Enter receiver postal code" formControlName="receiverPostalCode">
-            <span class="help-block" *ngIf="!form.get('receiverPostalCode')?.valid && form.get('receiverPostalCode')?.touched">Please provide receiver's postal code</span>
-          </div>
-
-          <div class="form-group">
-            <label for="receiverStateInput">State</label>
-            <input type="text" class="form-control" id="receiverStateInput" placeholder="Enter receiver state/country" formControlName="receiverState">
-            <span class="help-block" *ngIf="!form.get('receiverState')?.valid && form.get('receiverState')?.touched">Please provide receiver's state/country</span>
-          </div>
-
-          </ul>
-        </div>
-
-        <div class="form-group">
-          <label for="receiverCompanyInput">Company</label>
-          <input type="text" class="form-control" id="receiverCompanyInput" placeholder="Enter receiver company (optional)" formControlName="receiverCompany">
-        </div>
+          <mat-form-field appearance="fill">
+            <mat-label for="receiverCompanyInput">Receiver Company</mat-label>
+            <input matInput type="text" id="receiverCompanyInput" placeholder="Enter receiver company (optional)" formControlName="receiverCompany">
+          </mat-form-field>
 
         </ul>
       </div>
 
       <p *ngIf="showError()" class="error">{{ showError() }}</p>
 
-
       <button type="submit" class="btn btn-primary">Send new package!</button>
+
     </form>
   </div>
 </div>
