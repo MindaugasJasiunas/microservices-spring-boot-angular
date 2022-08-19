@@ -1,6 +1,7 @@
 package com.example.demo.exceptions;
 
 import lombok.extern.slf4j.Slf4j;
+import org.axonframework.queryhandling.QueryExecutionException;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,9 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
             ResponseStatusException ex = (ResponseStatusException) throwable;
             errorAttributesMap.put("message", ex.getMessage());
             //errorAttributesMap.put("customAttribute", "customAttributeValue");
+        }
+        if(throwable instanceof QueryExecutionException && throwable.getMessage().contains("The given id must not be null!")){
+            errorAttributesMap.put("message", "Server Error. Check your request and try again.");
         }
 
         errorAttributesMap.putIfAbsent("message", throwable.getMessage());

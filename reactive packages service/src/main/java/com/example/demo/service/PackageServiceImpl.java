@@ -50,7 +50,7 @@ public class PackageServiceImpl implements PackageService{
     public Mono<CustomPageImpl<Package>> findAll(PageRequest pageRequest) {
         log.debug("[PackageServiceImpl] findAll("+pageRequest+") called");
         return packageRepository.findAllBy(pageRequest)
-                .flatMap(aPackage -> setReceiverAndSender(Mono.just(aPackage))) // set receivers & senders for each package
+                .flatMap(aPackage -> setReceiverAndSender(Mono.just(aPackage))) // set receivers & senders for each package - can throw error ' java.lang.IllegalArgumentException: The given id must not be null! '
                 .collectList()
                 .zipWith(packageRepository.count())
                 .map(tuple -> new CustomPageImpl<>(tuple.getT1(), pageRequest, tuple.getT2()));
