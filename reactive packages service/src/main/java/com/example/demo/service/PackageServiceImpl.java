@@ -152,6 +152,12 @@ public class PackageServiceImpl implements PackageService{
     private Mono<Package> setReceiverAndSender(Mono<Package> pkg){
         return pkg.flatMap(aPackage -> Mono.zip(Mono.just(aPackage), receiverService.findReceiverById(aPackage.getReceiverId()), senderService.findSenderById(aPackage.getSenderId())))
                 .map(tuple -> {
+                    if(tuple.getT2() == null){
+                        log.error("[ERROR] Package "+tuple.getT1()+" Receiver DOESN'T EXIST !!");
+                    }
+                    if(tuple.getT3() == null){
+                        log.error("[ERROR] Package "+tuple.getT1()+" Sender DOESN'T EXIST !!");
+                    }
                     tuple.getT1().setReceiver(tuple.getT2());
                     tuple.getT1().setSender(tuple.getT3());
                     return tuple.getT1();
