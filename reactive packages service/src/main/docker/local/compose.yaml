@@ -89,7 +89,7 @@ services:
       - ourNetwork
 
   packages-app:
-    image: mindaugasjasiunas/demo
+    image: mindaugasjasiunas/packages-service
     container_name: packages-app
     environment:
       PORT: 8080
