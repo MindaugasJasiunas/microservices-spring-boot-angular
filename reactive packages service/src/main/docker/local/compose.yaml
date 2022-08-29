@@ -107,6 +107,20 @@ services:
     networks:
       - ourNetwork
 
+  delivery-app:
+    image: mindaugasjasiunas/delivery-service
+    container_name: delivery-app
+    environment:
+      PORT: 8081
+      axon.axonserver.servers: axonFramework:8124
+      eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+    ports:
+      - 8081:8081
+    depends_on:
+      - packages-app
+    networks:
+      - ourNetwork
+
 networks:
   ourNetwork:
     driver: bridge
