@@ -10,6 +10,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - ourNetwork
 
   mongoDB:
     image: mongo
@@ -25,6 +27,8 @@ services:
       MONGO_INITDB_DATABASE: packagesservicedb
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootroot
+    networks:
+      - ourNetwork
 
   # Database Manager
 #  mongo-express:
@@ -57,3 +61,52 @@ services:
       AXONIQ_AXONSERVER_HOSTNAME: localhost
       SERVER_PORT: 8024
       AXONIQ_AXONSERVER_DEVMODE_ENABLED: true #enable Axon Server to start up in development mode - it enables RESET button in dashboard. It can be used to clear the Event Store storage
+    networks:
+      - ourNetwork
+
+  eureka-1:
+    image: mindaugasjasiunas/eureka-server
+    container_name: eureka1
+    environment:
+      server.port: 8761
+      eureka.instance.hostname: eureka-1
+      eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+    ports:
+      - 8761:8761
+    networks:
+      - ourNetwork
+
+  eureka-2:
+    image: mindaugasjasiunas/eureka-server
+    container_name: eureka2
+    environment:
+      server.port: 8762
+      eureka.instance.hostname: eureka-2
+      eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+    ports:
+      - 8762:8762
+    networks:
+      - ourNetwork
+
+  packages-app:
+    image: mindaugasjasiunas/demo
+    container_name: packages-app
+    environment:
+      PORT: 8080
+      spring.data.mongodb.uri: mongodb://root:rootroot@mongoDB:27017/packagesservicedb?authSource=admin&retryWrites=true&w=majority
+      axon.axonserver.servers: axonFramework:8124
+      spring.rabbitmq.host: rabbitMQ
+      eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+#      eureka.instance.hostname: localhost
+    ports:
+      - 8080:8080
+    depends_on:
+      - axonFramework
+      - mongoDB
+      - rabbitMQ
+    networks:
+      - ourNetwork
+
+networks:
+  ourNetwork:
+    driver: bridge
