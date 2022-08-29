@@ -79,7 +79,8 @@ export class LoginComponent {
               );
             },
             error: (err: HttpErrorResponse) => {
-              this.error = err.error.message;
+              console.log(err);
+              this.error = err.error.message ? err.error.message : 'Error occured. Please try again later';
             }
           })
       );

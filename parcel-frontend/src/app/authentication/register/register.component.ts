@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
               this.router.navigate(['/login']);
             },
             error: (err: HttpErrorResponse) => {
-              this.error = err.error.message;
+              this.error = err.error.message ? err.error.message : 'Error occured. Please try again later';
             },
           })
       );
