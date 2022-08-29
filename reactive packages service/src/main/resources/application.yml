@@ -38,6 +38,8 @@ axon:
     general: jackson
     events: jackson
     messages: Jackson
+  axonserver:
+    servers: localhost:8124
 
 #enable circuit breaker
 feign:
