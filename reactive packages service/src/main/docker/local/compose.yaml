@@ -99,6 +99,7 @@ services:
       axon.axonserver.servers: axonFramework:8124
       spring.rabbitmq.host: rabbitMQ
       eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+      eureka.instance.prefer-ip-address: true # to ignore 'eureka.instance.hostname=localhost' in application.properties & to get routed in Spring Cloud API Gateway
     ports:
       - 8080:8080
     depends_on:
@@ -115,6 +116,7 @@ services:
       PORT: 8081
       axon.axonserver.servers: axonFramework:8124
       eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+      eureka.instance.prefer-ip-address: true # to ignore 'eureka.instance.hostname=localhost' in application.properties & to get routed in Spring Cloud API Gateway
     ports:
       - 8081:8081
     depends_on:
@@ -129,6 +131,7 @@ services:
       PORT: 8082
       axon.axonserver.servers: axonFramework:8124
       eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+      eureka.instance.prefer-ip-address: true # to ignore 'eureka.instance.hostname=localhost' in application.properties & to get routed in Spring Cloud API Gateway
     ports:
       - 8082:8082
     depends_on:
@@ -169,10 +172,34 @@ services:
       spring.r2dbc.url: r2dbc:postgresql://postgreSQL:5432/ouruserdb
       spring.rabbitmq.host: rabbitMQ
       eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
-      networks:
+      eureka.instance.prefer-ip-address: true # to ignore 'eureka.instance.hostname=localhost' in application.properties & to get routed in Spring Cloud API Gateway
+    networks:
       - ourNetwork
     depends_on:
       - postgreSQL
+
+  api-gateway:
+    image: mindaugasjasiunas/api-gateway
+    container_name: api-gateway
+    ports:
+      - 9090:9090
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+      spring.rabbitmq.host: rabbitMQ
+      # we can define routes here (overrides all that is configured in properties)
+#      SPRING_CLOUD_GATEWAY_ROUTES[0]_ID: users-home-additional
+#      SPRING_CLOUD_GATEWAY_ROUTES[0]_URI: lb://users-service/
+#      SPRING_CLOUD_GATEWAY_ROUTES[0]_PREDICATES[0]: Path=/home-sweet-home
+#      SPRING_CLOUD_GATEWAY_ROUTES[0]_PREDICATES[1]: Method=GET
+#      SPRING_CLOUD_GATEWAY_ROUTES[0]_FILTERS[0]: RemoveRequestHeader=Cookie
+#      SPRING_CLOUD_GATEWAY_ROUTES[0]_FILTERS[1]: RewritePath=/home-sweet-home, /
+    networks:
+      - ourNetwork
+    restart: always
+    depends_on:
+      - eureka-1
+      - eureka-2
 
 networks:
   ourNetwork:
