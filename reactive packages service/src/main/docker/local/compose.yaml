@@ -201,6 +201,24 @@ services:
       - eureka-1
       - eureka-2
 
+  parcel-frontend:
+    image: parcel-frontend-image
+    container_name: parcel-frontend
+    ports:
+      - 8088:80
+    networks:
+      - ourNetwork
+    environment:
+      API_URL: http://172.17.0.1:9090/
+#      API_LOGIN_URL: http://api-gateway:9090/login # net::ERR_NAME_NOT_RESOLVED
+#      API_LOGIN_URL: http://docker.host.internal:9090/login # net::ERR_NAME_NOT_RESOLVED
+      API_LOGIN_URL: http://172.17.0.1:9090/login
+      API_REGISTER_URL: http://172.17.0.1:9090/register
+      API_REFRESH_URL: http://172.17.0.1:9090/resettoken
+      API_PACKAGES_URL: http://172.17.0.1:9090/parcels
+      API_PACKAGE_TRACKING_URL: http://172.17.0.1:9090/tracking/
+      API_CREATE_PACKAGE_URL: http://172.17.0.1:9090/new
+
 networks:
   ourNetwork:
     driver: bridge
