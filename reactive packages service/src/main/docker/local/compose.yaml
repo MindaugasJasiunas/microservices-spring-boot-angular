@@ -108,6 +108,9 @@ services:
       - rabbitMQ
     networks:
       - ourNetwork
+    labels:
+      collect_logs_with_filebeat: 'true'
+      decode_log_event_to_json_object: 'true'
 
   delivery-app:
     image: mindaugasjasiunas/delivery-service
@@ -123,6 +126,9 @@ services:
       - packages-app
     networks:
       - ourNetwork
+    labels:
+      collect_logs_with_filebeat: 'true'
+      decode_log_event_to_json_object: 'true'
 
   payment-app:
     image: mindaugasjasiunas/payment-service
@@ -138,6 +144,9 @@ services:
       - packages-app
     networks:
       - ourNetwork
+    labels:
+      collect_logs_with_filebeat: 'true'
+      decode_log_event_to_json_object: 'true'
 
   postgreSQL:
     image: postgres
@@ -177,6 +186,9 @@ services:
       - ourNetwork
     depends_on:
       - postgreSQL
+    labels:
+      collect_logs_with_filebeat: 'true'
+      decode_log_event_to_json_object: 'true'
 
   api-gateway:
     image: mindaugasjasiunas/api-gateway
@@ -200,6 +212,9 @@ services:
     depends_on:
       - eureka-1
       - eureka-2
+    labels:
+      collect_logs_with_filebeat: 'true'
+      decode_log_event_to_json_object: 'true'
 
   parcel-frontend:
     image: parcel-frontend-image
@@ -234,6 +249,88 @@ services:
       API_REFRESH_URL: http://172.17.0.1:9090/resettoken
       API_PACKAGES_URL: http://172.17.0.1:9090/parcels
       API_PACKAGES_COUNT_URL: http://172.17.0.1:9090/new
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.5
+    container_name: elasticsearch
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - data01:/usr/share/elasticsearch/data #  The volume mount ensures that elasticsearch data is persisted across container restarts.
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - ourNetwork
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.4.0
+    container_name: logstash
+    ports:
+      - 9600:9600
+      - 12201:12201/udp
+    environment:
+      - logger.level = DEBUG
+      - ELASTICSEARCH_HOSTS = http://elasticsearch:9200
+      - LS_JAVA_OPTS = "-Xmx256m -Xms256m"
+    volumes:
+#      - /home/workstation/Desktop/ELK/testing-elk/logstash:/logstash_dir #otherwise error: No config files found in path /logstash_dir/logstash.conf
+      - /home/workstation/intellij projects/microservices-spring-boot-angular/reactive packages service/src/main/docker/ELK/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro # overrides 'main' pipeline config file with our config file
+#      - ~/settings/logstash.yml:/usr/share/logstash/config/logstash.yml # to override configuration
+    depends_on:
+      - elasticsearch
+    networks:
+      - ourNetwork
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.4.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS = http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    networks:
+      - ourNetwork
+
+  filebeat: # reads docker containers logs
+    container_name: filebeat
+    image:
+      docker.elastic.co/beats/filebeat:7.7.0
+    volumes:
+      - /home/workstation/intellij projects/microservices-spring-boot-angular/reactive packages service/src/main/docker/ELK/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro # Configuration file (:ro - read only mount)
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro           # Docker logs
+      - /var/run/docker.sock:/var/run/docker.sock:ro                       # Additional information about containers
+    user: root                                                             # Allow access to log files and docker.sock
+    restart: on-failure
+    networks:
+      - ourNetwork # make sure on the same network as ELK stack - otherwise error connecting to redis-cache:6379
+
+  redis-cache: # buffer
+    image: redis:6.2
+    container_name: redis-cache
+    #    ports:
+    #      - 6379:6379
+    networks:
+      - ourNetwork # make sure on the same network as ELK stack - otherwise error connecting redis-cache:6379
+
+volumes:
+  data01:
+    driver: local
 
 networks:
   ourNetwork:
