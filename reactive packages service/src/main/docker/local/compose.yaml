@@ -219,6 +219,22 @@ services:
       API_PACKAGE_TRACKING_URL: http://172.17.0.1:9090/tracking/
       API_CREATE_PACKAGE_URL: http://172.17.0.1:9090/new
 
+  courier-frontend:
+    image: courier-frontend-image
+    container_name: courier-frontend
+    ports:
+      - 8099:80
+    networks:
+      - ourNetwork
+    environment:
+      API_URL: http://172.17.0.1:9090/
+      #      API_LOGIN_URL: http://api-gateway:9090/login # net::ERR_NAME_NOT_RESOLVED
+      #      API_LOGIN_URL: http://docker.host.internal:9090/login # net::ERR_NAME_NOT_RESOLVED
+      API_LOGIN_URL: http://172.17.0.1:9090/login
+      API_REFRESH_URL: http://172.17.0.1:9090/resettoken
+      API_PACKAGES_URL: http://172.17.0.1:9090/parcels
+      API_PACKAGES_COUNT_URL: http://172.17.0.1:9090/new
+
 networks:
   ourNetwork:
     driver: bridge
