@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  rabbitMQ: # Spring Cloud Config already has it. duplication.
+  rabbitMQ:
     image: rabbitmq:3-management
     container_name: rabbitmq-spring-cloud-config-server
     ports:
@@ -71,6 +71,7 @@ services:
       server.port: 8761
       eureka.instance.hostname: eureka-1
       eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+      spring.rabbitmq.host: rabbitMQ
     ports:
       - 8761:8761
     networks:
@@ -83,6 +84,7 @@ services:
       server.port: 8762
       eureka.instance.hostname: eureka-2
       eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+      spring.rabbitmq.host: rabbitMQ
     ports:
       - 8762:8762
     networks:
@@ -97,7 +99,6 @@ services:
       axon.axonserver.servers: axonFramework:8124
       spring.rabbitmq.host: rabbitMQ
       eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
-#      eureka.instance.hostname: localhost
     ports:
       - 8080:8080
     depends_on:
@@ -134,6 +135,44 @@ services:
       - packages-app
     networks:
       - ourNetwork
+
+  postgreSQL:
+    image: postgres
+    container_name: postreSQL-ourUserDB
+    ports:
+      - 5432:5432
+      - 49153:49153
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: rootroot
+      POSTGRES_DB: ouruserdb
+  #    volumes:
+  #      - /home/linuxmachine/postgrestorage:/var/lib/postgresql/data
+    networks:
+      - ourNetwork
+
+  #  adminer:
+  #    image: adminer
+  #    restart: always
+  #    ports:
+  #      - 8080:8080
+
+  users-service:
+    image: mindaugasjasiunas/users-service
+    container_name: users-service
+    ports:
+      - 8083:8083
+    restart: always
+    environment:
+      PORT: 8083
+      spring.r2dbc.url: r2dbc:postgresql://postgreSQL:5432/ouruserdb
+      spring.rabbitmq.host: rabbitMQ
+      eureka.client.service-url.defaultZone: http://eureka-1:8761/eureka, http://eureka-2:8762/eureka
+      networks:
+      - ourNetwork
+    depends_on:
+      - postgreSQL
 
 networks:
   ourNetwork:
