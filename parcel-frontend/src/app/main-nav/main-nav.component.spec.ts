@@ -8,6 +8,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { MainNavComponent } from './main-nav.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('MainNavComponent', () => {
   let component: MainNavComponent;
@@ -17,6 +19,7 @@ describe('MainNavComponent', () => {
     TestBed.configureTestingModule({
       declarations: [MainNavComponent],
       imports: [
+        HttpClientTestingModule,
         NoopAnimationsModule,
         LayoutModule,
         MatButtonModule,
@@ -24,6 +27,7 @@ describe('MainNavComponent', () => {
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
+        MatMenuModule
       ]
     }).compileComponents();
   }));
