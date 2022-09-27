@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Address } from 'src/app/model/address.model';
 import { Package } from 'src/app/model/package.model';
@@ -52,7 +53,7 @@ export class PackageSendComponent implements OnInit, OnDestroy {
   error: string | null = null;
   subscriptions: Subscription[] = [];
 
-  constructor(private parcelService: ParcelService) {}
+  constructor(private parcelService: ParcelService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -124,6 +125,9 @@ export class PackageSendComponent implements OnInit, OnDestroy {
               // console.log(data);
               // console.log(data.status); // 200
               // console.log(data.statusText); // 'OK'
+
+              // redirect to main page
+              this.router.navigate(['/']);
               if(data.status !== 200){
                 this.error = 'Error occured while creating package';
               }

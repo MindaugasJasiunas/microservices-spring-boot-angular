@@ -1,0 +1,48 @@
+{
+  "publicId": "6fef60da-bd47-4732-81a1-61fe8d8a8736",
+  "trackingNumber": "00000000000000000000000000012345",
+  "packageContentsDescription": "secret",
+  "packageStatus": "NEW",
+  "packageWeight": 9.5,
+  "fragile": true,
+  "isReturn": false,
+  "numberOfPackages": 3,
+  "sender": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "phoneNumber": "+44 621562",
+    "email": "john.doe@example.com",
+    "address": {
+      "address1": "Hanworth Rd",
+      "apartmentNumber": "1",
+      "city": "Hounslow",
+      "houseNumber": "3",
+      "postalCode": "TW4 5NP",
+      "state": "Middlesex",
+      "address2": "London",
+      "address3": "United Kingdom"
+    },
+    "company": "Example co."
+  },
+  "receiver": {
+    "firstName": "Johnny",
+    "lastName": "Hankins",
+    "phoneNumber": "",
+    "email": "jhankins@example.com",
+    "address": {
+      "address1": "94 Childs Ave",
+      "apartmentNumber": "94",
+      "city": "Hounslow",
+      "houseNumber": "8",
+      "postalCode": "WV14 9XB",
+      "state": "West Midlands",
+      "address2": "Bilston",
+      "address3": "United Kingdom"
+    },
+    "company": ""
+  },
+  "senderId": "d0467010-8f0a-41a7-bb19-1b961ff7b00b",
+  "receiverId": "3b4beeb2-832d-48f3-a679-24a0cf3fe583",
+  "lastModifiedDate": "2022-08-22T11:33:48.149128498",
+  "createdDate": "2022-08-22T11:33:47.149085276"
+}
